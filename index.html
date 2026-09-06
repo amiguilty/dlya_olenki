@@ -392,77 +392,18 @@
     <!-- ФОН ИЗ PICTURE_BACK -->
     <div class="background-pictures">
 
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
-
-        <img
-            class="background-picture"
-            src="assets/picture_back.jpg"
-            alt=""
-        >
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+        <img class="background-picture" src="assets/picture_back.jpg" alt="">
 
     </div>
 
@@ -476,10 +417,7 @@
         playsinline
         preload="auto"
     >
-        <source
-            src="assets/video1.mp4"
-            type="video/mp4"
-        >
+        <source src="assets/video1.mp4" type="video/mp4">
     </video>
 
     <div id="app"></div>
@@ -497,83 +435,37 @@
     🔊
 </button>
 
-
 <!-- =========================
      АУДИО
      ========================= -->
 
-<audio
-    id="musicBack"
-    loop
-    preload="auto"
->
-    <source
-        src="assets/music_back.mp3"
-        type="audio/mpeg"
-    >
+<audio id="musicBack" loop preload="auto">
+    <source src="assets/music_back.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="musicClick"
-    preload="auto"
->
-    <source
-        src="assets/music_click.mp3"
-        type="audio/mpeg"
-    >
+<audio id="musicClick" preload="auto">
+    <source src="assets/music_click.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="music1"
-    preload="auto"
->
-    <source
-        src="assets/music1.mp3"
-        type="audio/mpeg"
-    >
+<audio id="music1" preload="auto">
+    <source src="assets/music1.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="music2"
-    preload="auto"
->
-    <source
-        src="assets/music2.mp3"
-        type="audio/mpeg"
-    >
+<audio id="music2" preload="auto">
+    <source src="assets/music2.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="music3"
-    preload="auto"
->
-    <source
-        src="assets/music3.mp3"
-        type="audio/mpeg"
-    >
+<audio id="music3" preload="auto">
+    <source src="assets/music3.mp3" type="audio/mpeg">
 </audio>
 
-<audio
-    id="music4"
-    preload="auto"
->
-    <source
-        src="assets/music4.mp3"
-        type="audio/mpeg"
-    >
+<audio id="music4" preload="auto">
+    <source src="assets/music4.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ЗВУК ОПЛАТЫ -->
-<audio
-    id="applePay"
-    preload="auto"
->
-    <source
-        src="assets/applepay.mp3"
-        type="audio/mpeg"
-    >
+<audio id="applePay" preload="auto">
+    <source src="assets/applepay.mp3" type="audio/mpeg">
 </audio>
-
 
 <script>
 
@@ -586,22 +478,22 @@
         {
             question: "реши задачу: 2+2 =",
             answer: "4",
-            music: "music1.mp3",
-            picture: "picture1.jpg"
+            music: "music1",
+            picture: "assets/picture1.jpg"
         },
 
         {
             question: "еще одну: 2*2 =",
             answer: "4",
-            music: "music2.mp3",
-            picture: "picture2.jpg"
+            music: "music2",
+            picture: "assets/picture2.jpg"
         },
 
         {
             question: "ахаха бля последняя: 2+2**2 =",
             answer: "6",
-            music: "music3.mp3",
-            picture: "picture3.jpg"
+            music: "music3",
+            picture: "assets/picture3.jpg"
         }
 
     ];
@@ -709,16 +601,10 @@
             event.stopPropagation();
 
             toggleBackgroundMusic();
+
         }
     );
 
-
-    /*
-     * Если браузер заблокировал
-     * автоматическое воспроизведение,
-     * пробуем включить музыку
-     * после взаимодействия.
-     */
 
     document.addEventListener(
         "click",
@@ -846,7 +732,6 @@
                     ${task.question}
                 </div>
 
-
                 <input
                     id="answerInput"
                     class="answer-input"
@@ -855,7 +740,6 @@
                     maxlength="1"
                     autocomplete="off"
                 >
-
 
                 <button
                     id="continueButton"
@@ -886,6 +770,10 @@
         input.focus();
 
 
+        /* =========================
+           ВВОД ОТВЕТА
+           ========================= */
+
         input.addEventListener(
             "input",
             () => {
@@ -896,7 +784,7 @@
 
 
                 /*
-                 * Только одна цифра 0–9.
+                 * Оставляем только одну цифру 0–9.
                  */
 
                 input.value =
@@ -905,12 +793,54 @@
                         .slice(0, 1);
 
 
-                button.disabled =
-                    input.value !== task.answer;
+                /*
+                 * Если поле пустое —
+                 * кнопка выключена.
+                 */
+
+                if (input.value === "") {
+
+                    button.disabled = true;
+
+                    return;
+                }
+
+
+                /*
+                 * ПРАВИЛЬНЫЙ ОТВЕТ
+                 *
+                 * Кнопка становится активной.
+                 */
+
+                if (
+                    input.value === task.answer
+                ) {
+
+                    button.disabled = false;
+
+                    return;
+                }
+
+
+                /*
+                 * НЕПРАВИЛЬНЫЙ ОТВЕТ
+                 *
+                 * Срабатывает СРАЗУ при вводе.
+                 *
+                 * Кнопку нажимать НЕ надо.
+                 */
+
+                button.disabled = true;
+
+                showWrongAnswer(task);
 
             }
         );
 
+
+        /* =========================
+           ENTER
+           ========================= */
 
         input.addEventListener(
             "keydown",
@@ -939,6 +869,10 @@
         );
 
 
+        /* =========================
+           КНОПКА ПРОДОЛЖИТЬ
+           ========================= */
+
         button.addEventListener(
             "click",
             () => {
@@ -951,6 +885,7 @@
 
             }
         );
+
     }
 
 
@@ -981,7 +916,8 @@
 
 
         /*
-         * ПРАВИЛЬНЫЙ ОТВЕТ
+         * Кнопка существует только
+         * для правильного ответа.
          */
 
         if (
@@ -1008,15 +944,8 @@
 
             }
 
-            return;
         }
 
-
-        /*
-         * НЕПРАВИЛЬНЫЙ ОТВЕТ
-         */
-
-        showWrongAnswer(task);
     }
 
 
@@ -1026,12 +955,22 @@
 
     function showWrongAnswer(task) {
 
+        /*
+         * Если интерфейс уже заблокирован,
+         * повторно ничего не запускаем.
+         */
+
+        if (interfaceLocked) {
+            return;
+        }
+
+
         interfaceLocked = true;
 
 
         /*
-         * Проигрываем
-         * music1 / music2 / music3
+         * Сразу запускаем
+         * соответствующий звук.
          */
 
         const music =
@@ -1049,40 +988,29 @@
             music
                 .play()
                 .catch(() => {});
+
         }
 
 
         /*
-         * Полностью блокируем
-         * страницу на 3 секунды.
-         */
-
-        const blocker =
-            document.createElement("div");
-
-        blocker.className =
-            "interaction-blocker";
-
-        document.body.appendChild(
-            blocker
-        );
-
-
-        /*
-         * Показываем
+         * Сразу показываем
          * соответствующую картинку.
          */
 
         const picture =
             document.createElement("img");
 
+
         picture.className =
             "wrong-picture";
+
 
         picture.src =
             task.picture;
 
+
         picture.alt = "";
+
 
         document.body.appendChild(
             picture
@@ -1090,8 +1018,30 @@
 
 
         /*
-         * Ровно через 3 секунды
-         * всё исчезает.
+         * Полностью блокируем
+         * интерфейс на 3 секунды.
+         */
+
+        const blocker =
+            document.createElement("div");
+
+
+        blocker.className =
+            "interaction-blocker";
+
+
+        document.body.appendChild(
+            blocker
+        );
+
+
+        /*
+         * Ровно через 3 секунды:
+         *
+         * - картинка исчезает;
+         * - блокировка снимается;
+         * - поле очищается;
+         * - можно снова вводить ответ.
          */
 
         const timer =
@@ -1109,11 +1059,25 @@
                         );
 
 
+                    const button =
+                        document.getElementById(
+                            "continueButton"
+                        );
+
+
                     if (input) {
 
                         input.value = "";
 
                         input.focus();
+
+                    }
+
+
+                    if (button) {
+
+                        button.disabled = true;
+
                     }
 
                 },
@@ -1122,6 +1086,7 @@
 
 
         activeTimers.push(timer);
+
     }
 
 
@@ -1139,7 +1104,6 @@
                     Вы точно готовы узнать это?
                 </div>
 
-
                 <button
                     id="yesButton"
                     class="button active"
@@ -1148,9 +1112,7 @@
                     ДА
                 </button>
 
-
                 <div style="height: 10px;"></div>
-
 
                 <button
                     class="button"
@@ -1179,6 +1141,7 @@
 
                 }
             );
+
     }
 
 
@@ -1213,6 +1176,7 @@
 
 
         activeTimers.push(timer);
+
     }
 
 
@@ -1230,7 +1194,6 @@
                     ты почти у цели))
                 </div>
 
-
                 <button
                     class="button"
                     type="button"
@@ -1239,9 +1202,7 @@
                     УЗНАТЬ БЕСПЛАТНО
                 </button>
 
-
                 <div style="height: 10px;"></div>
-
 
                 <button
                     id="paidButton"
@@ -1263,35 +1224,24 @@
                 () => {
 
                     /*
-                     * ВАЖНО:
-                     * music_click.mp3 здесь НЕ запускается.
+                     * music_click НЕ запускается.
                      */
+
+                    musicClick.pause();
+
+                    musicClick.currentTime = 0;
 
                     playApplePaySound();
 
-
-                    /*
-                     * Пауки исчезают.
-                     */
-
                     stopFallingEmojis();
 
-
-                    /*
-                     * Запускаем дождь.
-                     */
-
                     startFallingPhotos();
-
-
-                    /*
-                     * Финальный экран.
-                     */
 
                     showFinalScreen();
 
                 }
             );
+
     }
 
 
@@ -1316,6 +1266,7 @@
             music4
                 .play()
                 .catch(() => {});
+
         }
 
 
@@ -1334,7 +1285,6 @@
                         margin-bottom: 20px;
                     "
                 >
-
 
                 <button
                     id="finalButton"
@@ -1365,14 +1315,12 @@
 
                 }
             );
+
     }
 
 
     /* =========================
        ПАУКИ / ПАУТИНА
-       =========================
-       
-       Весь эффект длится ровно 3 секунды.
        ========================= */
 
     function startFallingEmojis() {
@@ -1440,6 +1388,7 @@
             document.body.appendChild(
                 item
             );
+
         }
 
 
@@ -1457,11 +1406,6 @@
             );
 
 
-        /*
-         * Ровно через 3 секунды
-         * полностью прекращаем эффект.
-         */
-
         fallingStopTimer =
             setTimeout(
                 () => {
@@ -1471,6 +1415,7 @@
                 },
                 3000
             );
+
     }
 
 
@@ -1483,6 +1428,7 @@
             );
 
             fallingInterval = null;
+
         }
 
 
@@ -1493,6 +1439,7 @@
             );
 
             fallingStopTimer = null;
+
         }
 
 
@@ -1503,6 +1450,7 @@
             .forEach(
                 item => item.remove()
             );
+
     }
 
 
@@ -1550,11 +1498,6 @@
                 photos.length;
 
 
-            /*
-             * Большой размер,
-             * чтобы текст хорошо читался.
-             */
-
             const size =
                 110 +
                 Math.random() * 40;
@@ -1567,11 +1510,6 @@
             image.style.height =
                 "auto";
 
-
-            /*
-             * Случайное положение
-             * по горизонтали.
-             */
 
             const maxLeft =
                 Math.max(
@@ -1586,11 +1524,6 @@
                 "px";
 
 
-            /*
-             * Очень медленное падение:
-             * 9–13 секунд.
-             */
-
             const duration =
                 9 +
                 Math.random() * 4;
@@ -1599,10 +1532,6 @@
             image.style.animationDuration =
                 duration + "s";
 
-
-            /*
-             * Никакого вращения.
-             */
 
             document.body.appendChild(
                 image
@@ -1617,19 +1546,12 @@
 
                 }
             );
+
         }
 
 
-        /*
-         * Первая картинка сразу.
-         */
-
         createFallingPhoto();
 
-
-        /*
-         * Затем спокойный дождь.
-         */
 
         photoFallingInterval =
             setInterval(
@@ -1640,6 +1562,7 @@
                 },
                 700
             );
+
     }
 
 
@@ -1652,6 +1575,7 @@
             );
 
             photoFallingInterval = null;
+
         }
 
 
@@ -1662,6 +1586,7 @@
             .forEach(
                 photo => photo.remove()
             );
+
     }
 
 
@@ -1680,12 +1605,34 @@
         removeWrongScreen();
 
 
+        /*
+         * Останавливаем music4,
+         * чтобы при новом прохождении
+         * он не продолжал играть.
+         */
+
+        const music4 =
+            document.getElementById(
+                "music4"
+            );
+
+
+        if (music4) {
+
+            music4.pause();
+
+            music4.currentTime = 0;
+
+        }
+
+
         currentTask = 0;
 
         interfaceLocked = false;
 
 
         showTask();
+
     }
 
 
