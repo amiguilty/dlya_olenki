@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Задачка</title>
+    <title>Решите задачу</title>
 
     <style>
         * {
@@ -13,240 +13,302 @@
 
         html,
         body {
+            margin: 0;
             width: 100%;
             height: 100%;
-            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: #29272c;
         }
 
         body {
-            background: #29272c;
-            color: #f3a8d0;
-            font-family: Arial, Helvetica, sans-serif;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
-            overflow: hidden;
         }
 
         .page {
             width: 100%;
             height: 100%;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
+
+        /* =========================
+           ВИДЕО СВЕРХУ
+        ========================= */
+
+        .top-video {
+            position: absolute;
+            left: 50%;
+            top: calc(50% - 170px);
+            transform: translate(-50%, -100%);
+            width: 230px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #514d55;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* =========================
+           КОМПОЗИЦИЯ СПРАВА
+        ========================= */
+
+        .picture-dick {
+            position: absolute;
+            left: calc(50% + 235px);
+            top: 50%;
+            width: 150px;
+            height: 280px;
+            transform: translateY(-50%);
+            z-index: 2;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .picture-dick img {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 7px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+        }
+
+        .picture-dick .pic1 {
+            left: 51px;
+            top: 0;
+        }
+
+        .picture-dick .pic2 {
+            left: 51px;
+            top: 52px;
+        }
+
+        .picture-dick .pic3 {
+            left: 27px;
+            top: 104px;
+        }
+
+        .picture-dick .pic4 {
+            left: 75px;
+            top: 104px;
+        }
+
+        .picture-dick .pic5 {
+            left: 3px;
+            top: 156px;
+        }
+
+        .picture-dick .pic6 {
+            left: 51px;
+            top: 156px;
+        }
+
+        .picture-dick .pic7 {
+            left: 99px;
+            top: 156px;
+        }
+
+        .picture-dick .pic8 {
+            left: 51px;
+            top: 208px;
+        }
+
+        .picture-dick .pic9 {
+            left: 51px;
+            top: 260px;
+        }
+
+        /* =========================
+           ДИАЛОГ
+        ========================= */
 
         .dialog {
             width: min(420px, calc(100vw - 40px));
             min-height: 210px;
-
-            background: #3a373d;
-            border: 2px solid #514d55;
-            border-radius: 14px;
-
             padding: 30px;
-
+            background: #353238;
+            border: 1px solid #514d55;
+            border-radius: 14px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.45);
-
+            align-items: center;
+            text-align: center;
             position: relative;
             z-index: 10;
-
-            animation: dialogAppear 0.25s ease;
-        }
-
-        @keyframes dialogAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         .question {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
+            color: #f2edf4;
+            font-size: 20px;
+            line-height: 1.4;
             margin-bottom: 22px;
-            color: #f2a5cd;
         }
 
         .answer-input {
-            width: 90px;
-            height: 52px;
-
-            background: #29272c;
-            color: #f3a8d0;
-
-            border: 2px solid #716b76;
+            width: 100px;
+            height: 48px;
+            border: 2px solid #615c67;
             border-radius: 9px;
-
-            text-align: center;
-            font-size: 25px;
-            font-weight: bold;
-
             outline: none;
-
+            background: #29272c;
+            color: #ffffff;
+            font-size: 24px;
+            text-align: center;
             margin-bottom: 18px;
         }
 
         .answer-input:focus {
-            border-color: #e78bb8;
-            box-shadow: 0 0 0 3px rgba(231, 139, 184, 0.12);
+            border-color: #e86aa8;
+        }
+
+        .answer-input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         button {
-            width: 100%;
-            max-width: 280px;
-
-            height: 48px;
-
+            min-width: 210px;
+            min-height: 46px;
+            padding: 10px 20px;
             border: none;
             border-radius: 9px;
-
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
-
             cursor: pointer;
-
-            transition:
-                background 0.2s ease,
-                transform 0.1s ease,
-                opacity 0.2s ease;
+            transition: 0.15s;
         }
 
-        button:active:not(:disabled) {
-            transform: scale(0.97);
+        /* АКТИВНАЯ КНОПКА */
+
+        button.active {
+            background: #f06ba9;
+            color: #652c60;
         }
 
-        .active-button {
-            background: #f08fbd;
-            color: #6b2760;
+        button.active:hover {
+            background: #ff79b7;
+            transform: scale(1.02);
         }
 
-        .active-button:hover {
-            background: #f5a2c9;
-        }
+        /* НЕАКТИВНАЯ КНОПКА */
 
         button:disabled {
-            background: #625b6d;
-            color: #e99ac3;
+            background: #5b5263;
+            color: #ef72aa;
             cursor: not-allowed;
-            opacity: 0.9;
+            transform: none;
         }
 
-        #continueBtn {
-            margin-top: 2px;
-        }
+        /* =========================
+           НЕПРАВИЛЬНАЯ КАРТИНКА
+        ========================= */
 
         .wrong-picture {
             position: fixed;
-
-            max-width: min(260px, 70vw);
-            max-height: 260px;
-
-            object-fit: contain;
-
             left: 50%;
             top: 50%;
-
             transform: translate(-50%, -50%);
-
-            z-index: 100;
-
-            border-radius: 12px;
-
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-
-            animation: pictureAppear 0.2s ease;
-        }
-
-        @keyframes pictureAppear {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        .wait-text {
-            font-size: 26px;
-            font-weight: bold;
-            color: #f2a5cd;
-            text-align: center;
-        }
-
-        .final-dialog {
-            min-height: 300px;
-        }
-
-        .final-picture {
-            width: 100%;
-            max-width: 300px;
-            max-height: 230px;
-
+            max-width: min(500px, 80vw);
+            max-height: 70vh;
             object-fit: contain;
-
-            border-radius: 10px;
-
-            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.7);
+            z-index: 100;
         }
+
+        /* Полностью блокирует клики и ввод */
+        .interaction-blocker {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            background: transparent;
+            cursor: not-allowed;
+        }
+
+        /* =========================
+           ПАДАЮЩИЕ ПАУКИ
+        ========================= */
 
         .falling-item {
             position: fixed;
-
             top: -100px;
-
             z-index: 5;
-
             pointer-events: none;
-
             user-select: none;
-
-            animation-name: fall;
+            animation-name: fallDown;
             animation-timing-function: linear;
             animation-fill-mode: forwards;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
+        @keyframes fallDown {
+            from {
+                transform: translateY(0) rotate(0deg);
             }
 
-            100% {
-                transform: translateY(110vh) rotate(720deg);
-                opacity: 0.95;
+            to {
+                transform: translateY(115vh) rotate(360deg);
             }
         }
 
-        @media (max-width: 500px) {
+        /* =========================
+           ПАДАЮЩИЕ ФОТО
+        ========================= */
+
+        .falling-photo {
+            position: fixed;
+            top: -100px;
+            z-index: 5;
+            pointer-events: none;
+            user-select: none;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.45);
+            animation-name: photoFall;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes photoFall {
+            from {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(115vh) rotate(360deg);
+            }
+        }
+
+        /* =========================
+           МОБИЛЬНЫЕ
+        ========================= */
+
+        @media (max-width: 750px) {
+            .picture-dick {
+                display: none;
+            }
+
+            .top-video {
+                width: 190px;
+                height: 107px;
+                top: calc(50% - 165px);
+            }
 
             .dialog {
+                width: calc(100vw - 30px);
                 padding: 25px 20px;
             }
 
             .question {
-                font-size: 21px;
-            }
-
-            .wait-text {
-                font-size: 23px;
+                font-size: 18px;
             }
         }
     </style>
@@ -255,185 +317,185 @@
 <body>
 
 <div class="page">
+
+    <!-- ВИДЕО -->
+    <video
+        id="backgroundVideo"
+        class="top-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+    >
+        <source src="assets/video1.mp4" type="video/mp4">
+    </video>
+
+    <!-- КАРТИНКИ СПРАВА -->
+    <div class="picture-dick">
+        <img class="pic1" src="assets/picture_back.jpg">
+        <img class="pic2" src="assets/picture_back.jpg">
+        <img class="pic3" src="assets/picture_back.jpg">
+        <img class="pic4" src="assets/picture_back.jpg">
+        <img class="pic5" src="assets/picture_back.jpg">
+        <img class="pic6" src="assets/picture_back.jpg">
+        <img class="pic7" src="assets/picture_back.jpg">
+        <img class="pic8" src="assets/picture_back.jpg">
+        <img class="pic9" src="assets/picture_back.jpg">
+    </div>
+
+    <!-- СЮДА ПОПАДАЕТ ДИАЛОГ -->
     <div id="app"></div>
+
 </div>
 
 
-<!-- ============================================================
-     ЗВУКИ
-     ============================================================ -->
+<!-- =========================
+     АУДИО
+========================= -->
 
-<audio id="musicBack"
-       src="assets/music_back.mp3"
-       preload="auto"
-       loop>
+<audio id="musicBack" loop preload="auto">
+    <source src="assets/music_back.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="musicClick"
-       src="assets/music_click.mp3"
-       preload="auto">
+<audio id="musicClick" preload="auto">
+    <source src="assets/music_click.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="music1"
-       src="assets/music1.mp3"
-       preload="auto">
+<audio id="music1" preload="auto">
+    <source src="assets/music1.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="music2"
-       src="assets/music2.mp3"
-       preload="auto">
+<audio id="music2" preload="auto">
+    <source src="assets/music2.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="music3"
-       src="assets/music3.mp3"
-       preload="auto">
+<audio id="music3" preload="auto">
+    <source src="assets/music3.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="music4"
-       src="assets/music4.mp3"
-       preload="auto">
+<audio id="music4" preload="auto">
+    <source src="assets/music4.mp3" type="audio/mpeg">
 </audio>
 
 
 <script>
 
-    /*
-     * ============================================================
-     * ЗАДАЧИ
-     * ============================================================
-     */
+    /* =========================
+       ЗАДАЧИ
+    ========================= */
 
     const tasks = [
-
         {
             question: "решите задачу: 2+2 =",
             answer: "4",
             music: "music1",
-            picture: "picture1.jpg"
+            picture: "assets/picture1.jpg"
         },
-
         {
             question: "решите задачу: 2*2 =",
             answer: "4",
             music: "music2",
-            picture: "picture2.jpg"
+            picture: "assets/picture2.jpg"
         },
-
         {
             question: "решите задачу: 2+2**2 =",
             answer: "6",
             music: "music3",
-            picture: "picture3.jpg"
+            picture: "assets/picture3.jpg"
         }
-
     ];
 
 
-    /*
-     * ============================================================
-     * СОСТОЯНИЕ
-     * ============================================================
-     */
-
     let currentTask = 0;
 
-    let wrongPictureTimer = null;
-
-    let waitTimer = null;
+    let interfaceLocked = false;
 
     let fallingInterval = null;
+    let photoFallingInterval = null;
 
-    /*
-     * Был ли пользователь уже взаимодействовал
-     * со страницей.
-     */
-    let musicStarted = false;
+    let activeTimers = [];
 
 
-    const app = document.getElementById("app");
+    /* =========================
+       ЭЛЕМЕНТЫ АУДИО
+    ========================= */
+
+    const musicBack = document.getElementById("musicBack");
+    const musicClick = document.getElementById("musicClick");
+    const music1 = document.getElementById("music1");
+    const music2 = document.getElementById("music2");
+    const music3 = document.getElementById("music3");
+    const music4 = document.getElementById("music4");
+
+    const backgroundVideo = document.getElementById("backgroundVideo");
 
 
-    /*
-     * ============================================================
-     * ФОНОВАЯ МУЗЫКА
-     * ============================================================
-     */
+    /* =========================
+       ЗАПУСК ВИДЕО
+    ========================= */
+
+    window.addEventListener("load", () => {
+
+        backgroundVideo.play().catch(() => {});
+
+        startBackgroundMusic();
+
+        showTask();
+
+    });
+
+
+    /* =========================
+       ФОНОВАЯ МУЗЫКА
+    ========================= */
 
     function startBackgroundMusic() {
 
-        const musicBack =
-            document.getElementById("musicBack");
+        musicBack.volume = 0.35;
 
-        if (!musicBack) {
-            return;
-        }
+        musicBack.play().catch(() => {
 
-        /*
-         * Если музыка уже играет — ничего не делаем.
-         */
-        if (!musicBack.paused) {
-            return;
-        }
+            // Браузер мог заблокировать autoplay со звуком.
+            // Попробуем снова после первого взаимодействия.
 
-        const promise = musicBack.play();
-
-        if (promise !== undefined) {
-
-            promise
-                .then(() => {
-
-                    musicStarted = true;
-
-                })
-                .catch(() => {
-
-                    /*
-                     * Браузер мог заблокировать autoplay.
-                     * Следующее действие пользователя
-                     * попробует запустить музыку снова.
-                     */
-
-                });
-        }
+        });
     }
 
 
-    /*
-     * ============================================================
-     * ЗАПУСК ФОНОВОЙ МУЗЫКИ ПРИ ПЕРВОМ ДЕЙСТВИИ
-     * ============================================================
-     */
+    document.addEventListener("click", () => {
 
-    document.addEventListener("click", startBackgroundMusic);
+        if (musicBack.paused) {
+            musicBack.play().catch(() => {});
+        }
 
-    document.addEventListener("keydown", startBackgroundMusic);
-
-    document.addEventListener("touchstart", startBackgroundMusic);
+    }, { once: false });
 
 
-    /*
-     * ============================================================
-     * ПОКАЗ ПЕРВОЙ ЗАДАЧИ
-     * ============================================================
-     */
+    document.addEventListener("keydown", () => {
 
-    showTask();
+        if (musicBack.paused) {
+            musicBack.play().catch(() => {});
+        }
+
+    }, { once: false });
 
 
-    /*
-     * ============================================================
-     * ПОКАЗ ЗАДАЧИ
-     * ============================================================
-     */
+    /* =========================
+       ПОКАЗ ЗАДАЧИ
+    ========================= */
 
     function showTask() {
 
         clearTimers();
 
+        interfaceLocked = false;
+
         const task = tasks[currentTask];
 
-        app.innerHTML = `
+        const app = document.getElementById("app");
 
+        app.innerHTML = `
             <div class="dialog">
 
                 <div class="question">
@@ -447,13 +509,11 @@
                     inputmode="numeric"
                     maxlength="1"
                     autocomplete="off"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    spellcheck="false"
                 >
 
                 <button
-                    id="continueBtn"
+                    id="continueButton"
+                    class="active"
                     disabled
                 >
                     ПРОДОЛЖИТЬ
@@ -463,403 +523,285 @@
         `;
 
 
-        const input =
-            document.getElementById("answerInput");
-
-        const continueBtn =
-            document.getElementById("continueBtn");
+        const input = document.getElementById("answerInput");
+        const button = document.getElementById("continueButton");
 
 
-        /*
-         * ========================================================
-         * ВВОД ОТВЕТА
-         * ========================================================
-         */
+        /* Только одна цифра 0-9 */
 
-        input.addEventListener("input", function () {
+        input.addEventListener("input", () => {
 
-            startBackgroundMusic();
-
-            this.value =
-                this.value
-                    .replace(/[^0-9]/g, "");
-
-            if (this.value.length > 1) {
-
-                this.value =
-                    this.value.charAt(0);
-
-            }
-
-            checkAnswer();
-        });
-
-
-        /*
-         * ========================================================
-         * КЛАВИАТУРА
-         * ========================================================
-         */
-
-        input.addEventListener("keydown", function (event) {
-
-            const allowedKeys = [
-
-                "Backspace",
-                "Delete",
-                "ArrowLeft",
-                "ArrowRight",
-                "Tab"
-
-            ];
-
-            if (
-                allowedKeys.includes(event.key) ||
-                /^[0-9]$/.test(event.key)
-            ) {
-
-                return;
-
-            }
-
-            event.preventDefault();
-        });
-
-
-        /*
-         * ========================================================
-         * ВСТАВКА
-         * ========================================================
-         */
-
-        input.addEventListener("paste", function (event) {
-
-            event.preventDefault();
-
-            startBackgroundMusic();
-
-            const pastedText =
-                (event.clipboardData ||
-                 window.clipboardData)
-                .getData("text");
-
-            const digit =
-                pastedText
-                    .replace(/[^0-9]/g, "")
-                    .charAt(0);
-
-            this.value = digit;
-
-            checkAnswer();
-        });
-
-
-        /*
-         * ========================================================
-         * КНОПКА ПРОДОЛЖИТЬ
-         * ========================================================
-         */
-
-        continueBtn.addEventListener("click", function () {
-
-            if (this.disabled) {
+            if (interfaceLocked) {
                 return;
             }
 
+            input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
 
-            /*
-             * Запускаем фоновую музыку,
-             * если браузер ещё не разрешил её.
-             */
-            startBackgroundMusic();
+            button.disabled = input.value !== task.answer;
+
+        });
 
 
-            /*
-             * Звук клика.
-             */
+        input.addEventListener("keydown", (event) => {
+
+            if (interfaceLocked) {
+                event.preventDefault();
+                return;
+            }
+
+            if (event.key === "Enter") {
+
+                if (!button.disabled) {
+                    button.click();
+                }
+
+            }
+
+        });
+
+
+        button.addEventListener("click", () => {
+
+            if (button.disabled || interfaceLocked) {
+                return;
+            }
+
             playClickSound();
 
-
             /*
-             * Следующая задача.
+             * После каждого активного продолжения
+             * запускаем пауков/паутину.
              */
+            startFallingEmojis();
+
+
             currentTask++;
 
-
-            if (currentTask >= tasks.length) {
-
-                showReadyScreen();
-
-            } else {
+            if (currentTask < tasks.length) {
 
                 showTask();
 
+            } else {
+
+                showReadyScreen();
+
             }
 
         });
 
 
-        /*
-         * Автоматический фокус.
-         */
         setTimeout(() => {
 
-            input.focus();
+            if (!interfaceLocked) {
+                input.focus();
+            }
 
-        }, 100);
+        }, 50);
 
     }
 
 
-    /*
-     * ============================================================
-     * ПРОВЕРКА ОТВЕТА
-     * ============================================================
-     */
+    /* =========================
+       ПРОВЕРКА ОТВЕТА
+    ========================= */
 
     function checkAnswer() {
 
-        const input =
-            document.getElementById("answerInput");
-
-        const continueBtn =
-            document.getElementById("continueBtn");
-
-
-        if (!input || !continueBtn) {
+        if (interfaceLocked) {
             return;
         }
 
+        const input = document.getElementById("answerInput");
+
+        if (!input) {
+            return;
+        }
 
         const value = input.value;
 
+        const task = tasks[currentTask];
 
-        /*
-         * ПРАВИЛЬНЫЙ ОТВЕТ
-         */
 
-        if (value === tasks[currentTask].answer) {
-
-            continueBtn.disabled = false;
-
-            continueBtn.classList.add(
-                "active-button"
-            );
+        if (value === task.answer) {
 
             return;
+
         }
 
 
-        /*
-         * Пустое поле.
-         */
+        /* Неправильный ответ */
 
-        if (value === "") {
+        playMusic(task.music);
 
-            continueBtn.disabled = true;
+        showWrongPicture(task.picture);
 
-            continueBtn.classList.remove(
-                "active-button"
-            );
-
-            return;
-        }
+    }
 
 
-        /*
-         * НЕПРАВИЛЬНЫЙ ОТВЕТ
-         */
+    /* =========================
+       ОБРАБОТКА НЕПРАВИЛЬНОГО
+       ОТВЕТА
+    ========================= */
 
-        continueBtn.disabled = true;
+    function setupWrongAnswerListener() {
 
-        continueBtn.classList.remove(
-            "active-button"
-        );
+        document.addEventListener("input", () => {
 
+            if (interfaceLocked) {
+                return;
+            }
 
-        /*
-         * Проигрываем соответствующий
-         * неправильный звук.
-         */
+            const input = document.getElementById("answerInput");
 
-        playMusic(
-            tasks[currentTask].music
-        );
+            if (!input) {
+                return;
+            }
 
+            const task = tasks[currentTask];
 
-        /*
-         * Показываем соответствующую картинку.
-         */
+            if (input.value.length === 1 && input.value !== task.answer) {
 
-        showWrongPicture(
-            tasks[currentTask].picture
-        );
-
-
-        /*
-         * Очищаем поле.
-         */
-
-        setTimeout(() => {
-
-            const currentInput =
-                document.getElementById(
-                    "answerInput"
-                );
-
-            if (currentInput) {
-
-                currentInput.value = "";
-
-                currentInput.focus();
+                checkAnswer();
 
             }
 
-        }, 100);
+        });
 
     }
 
 
-    /*
-     * ============================================================
-     * ЗВУК АКТИВНОЙ КНОПКИ
-     * ============================================================
-     */
+    setupWrongAnswerListener();
+
+
+    /* =========================
+       КНОПКА / КЛИК
+    ========================= */
 
     function playClickSound() {
 
-        const audio =
-            document.getElementById(
-                "musicClick"
-            );
+        musicClick.currentTime = 0;
 
-        if (!audio) {
-            return;
-        }
-
-
-        audio.currentTime = 0;
-
-
-        const promise =
-            audio.play();
-
-
-        if (promise !== undefined) {
-
-            promise.catch(() => {});
-
-        }
+        musicClick.play().catch(() => {});
 
     }
 
 
-    /*
-     * ============================================================
-     * ОБЫЧНАЯ МУЗЫКА
-     * ============================================================
-     */
+    /* =========================
+       МУЗЫКА ОШИБКИ
+    ========================= */
 
     function playMusic(id) {
 
-        const audio =
-            document.getElementById(id);
+        const audio = document.getElementById(id);
 
         if (!audio) {
             return;
         }
 
-
         audio.currentTime = 0;
 
-
-        const promise =
-            audio.play();
-
-
-        if (promise !== undefined) {
-
-            promise.catch(() => {});
-
-        }
+        audio.play().catch(() => {});
 
     }
 
 
-    /*
-     * ============================================================
-     * НЕПРАВИЛЬНАЯ КАРТИНКА
-     * ============================================================
-     */
+    /* =========================
+       НЕПРАВИЛЬНАЯ КАРТИНКА
+       РОВНО 3 СЕКУНДЫ
+    ========================= */
 
-    function showWrongPicture(filename) {
+    function showWrongPicture(src) {
 
-        clearTimeout(
-            wrongPictureTimer
-        );
+        interfaceLocked = true;
 
 
-        const oldPicture =
-            document.querySelector(
-                ".wrong-picture"
-            );
+        const input = document.getElementById("answerInput");
 
-
-        if (oldPicture) {
-            oldPicture.remove();
+        if (input) {
+            input.disabled = true;
+            input.blur();
         }
 
 
-        const img =
-            document.createElement("img");
+        /* Блокировка всего интерфейса */
+
+        const blocker = document.createElement("div");
+
+        blocker.className = "interaction-blocker";
+
+        blocker.id = "interactionBlocker";
+
+        document.body.appendChild(blocker);
 
 
-        img.src =
-            "assets/" + filename;
+        /* Картинка */
 
+        const img = document.createElement("img");
 
-        img.className =
-            "wrong-picture";
+        img.src = src;
 
+        img.className = "wrong-picture";
 
-        img.onerror =
-            function () {
-
-                this.remove();
-
-            };
-
+        img.id = "wrongPicture";
 
         document.body.appendChild(img);
 
 
         /*
-         * Через 5 секунд убрать.
+         * Через РОВНО 3000 мс
+         * картинка исчезает,
+         * блокировка снимается,
+         * можно вводить ответ снова.
          */
 
-        wrongPictureTimer =
-            setTimeout(() => {
+        const timer = setTimeout(() => {
 
-                img.remove();
+            const picture = document.getElementById("wrongPicture");
 
-            }, 5000);
+            const block = document.getElementById("interactionBlocker");
+
+            if (picture) {
+                picture.remove();
+            }
+
+            if (block) {
+                block.remove();
+            }
+
+
+            interfaceLocked = false;
+
+
+            const newInput = document.getElementById("answerInput");
+
+            if (newInput) {
+
+                newInput.disabled = false;
+
+                newInput.value = "";
+
+                newInput.focus();
+
+            }
+
+        }, 3000);
+
+
+        activeTimers.push(timer);
 
     }
 
 
-    /*
-     * ============================================================
-     * ПОСЛЕ ТРЁХ ЗАДАЧ
-     * ============================================================
-     */
+    /* =========================
+       ЭКРАН "ВЫ ГОТОВЫ?"
+    ========================= */
 
     function showReadyScreen() {
 
-        clearTimers();
+        const app = document.getElementById("app");
 
 
         app.innerHTML = `
-
             <div class="dialog">
 
                 <div class="question">
@@ -867,8 +809,8 @@
                 </div>
 
                 <button
-                    id="yesBtn"
-                    class="active-button"
+                    id="yesButton"
+                    class="active"
                 >
                     ДА
                 </button>
@@ -880,282 +822,235 @@
                 </button>
 
             </div>
-
         `;
 
 
-        document
-            .getElementById("yesBtn")
-            .addEventListener(
-                "click",
-                function () {
+        const yesButton = document.getElementById("yesButton");
 
-                    /*
-                     * Звук активной кнопки.
-                     */
-                    playClickSound();
 
-                    showWaitScreen();
+        yesButton.addEventListener("click", () => {
 
-                }
-            );
+            if (interfaceLocked) {
+                return;
+            }
+
+            playClickSound();
+
+            startFallingEmojis();
+
+            showWaitScreen();
+
+        });
 
     }
 
 
-    /*
-     * ============================================================
-     * ЩА СЕК
-     * ============================================================
-     */
+    /* =========================
+       ЭКРАН "ЩА СЕК"
+    ========================= */
 
     function showWaitScreen() {
 
-        clearTimers();
+        const app = document.getElementById("app");
 
 
         app.innerHTML = `
-
             <div class="dialog">
 
-                <div class="wait-text">
+                <div class="question">
                     Ща сек
                 </div>
 
             </div>
-
         `;
 
 
-        /*
-         * Через 5 секунд следующий экран.
-         */
+        const timer = setTimeout(() => {
 
-        waitTimer =
-            setTimeout(() => {
+            showPaymentScreen();
 
-                showPaymentScreen();
+        }, 5000);
 
-            }, 5000);
+
+        activeTimers.push(timer);
 
     }
 
 
-    /*
-     * ============================================================
-     * ЭКРАН ОПЛАТЫ
-     * ============================================================
-     */
+    /* =========================
+       ЭКРАН ОПЛАТЫ
+    ========================= */
 
     function showPaymentScreen() {
 
-        app.innerHTML = `
+        const app = document.getElementById("app");
 
+
+        app.innerHTML = `
             <div class="dialog">
+
+                <div class="question">
+                    Ну всё, можно узнать
+                </div>
 
                 <button disabled>
                     УЗНАТЬ БЕСПЛАТНО
                 </button>
 
-                <div style="height: 14px;"></div>
+                <div style="height: 12px;"></div>
 
                 <button
-                    id="paidBtn"
-                    class="active-button"
+                    id="paidButton"
+                    class="active"
                 >
                     УЗНАТЬ ЗА 10 ГРЫВЕНЬ
                 </button>
 
             </div>
-
         `;
 
 
-        document
-            .getElementById("paidBtn")
-            .addEventListener(
-                "click",
-                function () {
-
-                    /*
-                     * Звук активной кнопки.
-                     */
-
-                    playClickSound();
+        const paidButton = document.getElementById("paidButton");
 
 
-                    /*
-                     * После этого запускаем
-                     * music4 + финальный экран.
-                     */
+        paidButton.addEventListener("click", () => {
 
-                    showFinalScreen();
+            if (interfaceLocked) {
+                return;
+            }
 
-                }
-            );
+            playClickSound();
+
+            /*
+             * Пауки/паутинки убираем.
+             * Вместо них запускаем фотографии.
+             */
+            stopFallingEmojis();
+
+            startFallingPhotos();
+
+            showFinalScreen();
+
+        });
 
     }
 
 
-    /*
-     * ============================================================
-     * ФИНАЛ
-     * ============================================================
-     */
+    /* =========================
+       ФИНАЛЬНЫЙ ЭКРАН
+    ========================= */
 
     function showFinalScreen() {
-
-        /*
-         * Music4.
-         */
 
         playMusic("music4");
 
 
-        /*
-         * Падающие эмодзи.
-         */
-
-        startFallingEmojis();
+        const app = document.getElementById("app");
 
 
         app.innerHTML = `
-
-            <div class="dialog final-dialog">
+            <div class="dialog">
 
                 <img
-                    class="final-picture"
-                    src="assets/picture5.png"
-                    alt=""
-                    onerror="
-                        this.style.display='none'
+                    src="assets/picture5.jpg"
+                    style="
+                        max-width: 100%;
+                        max-height: 180px;
+                        object-fit: contain;
+                        border-radius: 10px;
+                        margin-bottom: 18px;
                     "
                 >
 
                 <button
-                    id="restartBtn"
-                    class="active-button"
+                    id="finalButton"
+                    class="active"
                 >
                     бля спасибо нахуй
                 </button>
 
             </div>
-
         `;
 
 
-        document
-            .getElementById("restartBtn")
-            .addEventListener(
-                "click",
-                function () {
-
-                    /*
-                     * Звук активной кнопки.
-                     */
-
-                    playClickSound();
+        const finalButton = document.getElementById("finalButton");
 
 
-                    /*
-                     * Начинаем всё заново.
-                     */
+        finalButton.addEventListener("click", () => {
 
-                    restartEverything();
+            if (interfaceLocked) {
+                return;
+            }
 
-                }
-            );
+            playClickSound();
+
+            /*
+             * Останавливаем падающие фотографии.
+             */
+            stopFallingPhotos();
+
+            /*
+             * Возвращаем всё в самое начало.
+             */
+            restartEverything();
+
+        });
 
     }
 
 
-    /*
-     * ============================================================
-     * ПАДАЮЩИЕ ЭМОДЗИ
-     * ============================================================
-     */
+    /* =========================
+       ПАДАЮЩИЕ ПАУКИ / ПАУТИНЫ
+    ========================= */
 
     function startFallingEmojis() {
+
+        /*
+         * На всякий случай убираем падающие фотографии.
+         */
+        stopFallingPhotos();
 
         stopFallingEmojis();
 
 
-        for (let i = 0; i < 18; i++) {
-
-            setTimeout(() => {
-
-                createFallingEmoji();
-
-            }, i * 120);
-
-        }
+        const emojis = [
+            "🕸️",
+            "🕷️",
+            "🕸️",
+            "🕷️"
+        ];
 
 
-        fallingInterval =
-            setInterval(() => {
+        fallingInterval = setInterval(() => {
 
-                createFallingEmoji();
+            createFallingEmoji(
+                emojis[Math.floor(Math.random() * emojis.length)]
+            );
 
-            }, 300);
+        }, 350);
 
     }
 
 
-    function createFallingEmoji() {
+    function createFallingEmoji(emoji) {
 
-        const item =
-            document.createElement("div");
+        const item = document.createElement("div");
 
+        item.className = "falling-item";
 
-        item.className =
-            "falling-item";
-
-
-        const emojis = [
-
-            "🕸️",
-            "🕷️",
-            "🕸️",
-            "🕷️",
-            "🕸️",
-            "🕷️",
-            "🕸️"
-
-        ];
+        item.textContent = emoji;
 
 
-        item.textContent =
-            emojis[
-                Math.floor(
-                    Math.random() *
-                    emojis.length
-                )
-            ];
+        const size = 24 + Math.random() * 30;
+
+        item.style.fontSize = size + "px";
+
+        item.style.left = Math.random() * 100 + "vw";
 
 
-        item.style.left =
-            Math.random() * 100 + "vw";
+        const duration = 3 + Math.random() * 4;
 
-
-        const size =
-            25 + Math.random() * 30;
-
-
-        item.style.fontSize =
-            size + "px";
-
-
-        const duration =
-            3 + Math.random() * 5;
-
-
-        item.style.animationDuration =
-            duration + "s";
-
-
-        item.style.transform =
-            `translateY(-100px)
-             rotate(${Math.random() * 360}deg)`;
+        item.style.animationDuration = duration + "s";
 
 
         document.body.appendChild(item);
@@ -1165,7 +1060,7 @@
 
             item.remove();
 
-        }, (duration + 1) * 1000);
+        }, (duration + 0.5) * 1000);
 
     }
 
@@ -1174,9 +1069,7 @@
 
         if (fallingInterval) {
 
-            clearInterval(
-                fallingInterval
-            );
+            clearInterval(fallingInterval);
 
             fallingInterval = null;
 
@@ -1184,138 +1077,187 @@
 
 
         document
-            .querySelectorAll(
-                ".falling-item"
-            )
-            .forEach(
-                item => item.remove()
-            );
+            .querySelectorAll(".falling-item")
+            .forEach(item => item.remove());
 
     }
 
 
-    /*
-     * ============================================================
-     * НАЧАТЬ ВСЁ СНАЧАЛА
-     * ============================================================
-     */
+    /* =========================
+       ПАДАЮЩИЕ ФОТО
+    ========================= */
 
-    function restartEverything() {
+    function startFallingPhotos() {
 
-        stopFallingEmojis();
+        stopFallingPhotos();
+
+
+        const photos = [
+            "assets/p1.jpg",
+            "assets/p2.jpg",
+            "assets/p3.jpg"
+        ];
 
 
         /*
-         * Останавливаем music4.
+         * Создаём первую фотографию сразу,
+         * чтобы не было задержки.
          */
 
-        const music4 =
-            document.getElementById(
-                "music4"
+        createFallingPhoto(
+            photos[Math.floor(Math.random() * photos.length)]
+        );
+
+
+        /*
+         * Потом фотографии продолжают падать
+         * постоянно.
+         */
+
+        photoFallingInterval = setInterval(() => {
+
+            createFallingPhoto(
+                photos[Math.floor(Math.random() * photos.length)]
             );
 
+        }, 350);
 
-        if (music4) {
+    }
 
-            music4.pause();
 
-            music4.currentTime = 0;
+    function createFallingPhoto(src) {
 
-        }
+        const img = document.createElement("img");
+
+        img.className = "falling-photo";
+
+        img.src = src;
 
 
         /*
-         * ========================================================
-         * ФОНОВАЯ МУЗЫКА:
-         *
-         * По твоему условию при возврате
-         * на первый этап она начинается
-         * С НАЧАЛА.
-         * ========================================================
+         * Маленький случайный размер.
          */
 
-        const musicBack =
-            document.getElementById(
-                "musicBack"
-            );
+        const size = 50 + Math.random() * 35;
 
+        img.style.width = size + "px";
 
-        if (musicBack) {
-
-            musicBack.pause();
-
-            musicBack.currentTime = 0;
-
-        }
+        img.style.height = size + "px";
 
 
         /*
-         * Сбрасываем прогресс.
+         * Случайная позиция по горизонтали.
          */
 
-        currentTask = 0;
+        img.style.left =
+            Math.random() * (100 - (size / window.innerWidth * 100))
+            + "vw";
 
 
         /*
-         * Снова показываем первую задачу.
+         * Небольшой случайный поворот.
          */
 
-        showTask();
+        const rotation = -30 + Math.random() * 60;
+
+        img.style.transform =
+            "rotate(" + rotation + "deg)";
 
 
         /*
-         * Запускаем фон.
-         *
-         * Это сработает, потому что пользователь
-         * только что нажал активную кнопку.
+         * Скорость падения.
+         */
+
+        const duration = 3 + Math.random() * 4;
+
+        img.style.animationDuration = duration + "s";
+
+
+        document.body.appendChild(img);
+
+
+        /*
+         * Удаляем после завершения падения.
          */
 
         setTimeout(() => {
 
-            startBackgroundMusic();
+            img.remove();
 
-        }, 50);
+        }, (duration + 0.5) * 1000);
 
     }
 
 
-    /*
-     * ============================================================
-     * ОЧИСТКА ТАЙМЕРОВ
-     * ============================================================
-     */
+    function stopFallingPhotos() {
 
-    function clearTimers() {
+        if (photoFallingInterval) {
 
-        if (wrongPictureTimer) {
+            clearInterval(photoFallingInterval);
 
-            clearTimeout(
-                wrongPictureTimer
-            );
-
-            wrongPictureTimer = null;
-
-        }
-
-
-        if (waitTimer) {
-
-            clearTimeout(
-                waitTimer
-            );
-
-            waitTimer = null;
+            photoFallingInterval = null;
 
         }
 
 
         document
-            .querySelectorAll(
-                ".wrong-picture"
-            )
-            .forEach(
-                img => img.remove()
-            );
+            .querySelectorAll(".falling-photo")
+            .forEach(photo => photo.remove());
+
+    }
+
+
+    /* =========================
+       ПЕРЕЗАПУСК
+    ========================= */
+
+    function restartEverything() {
+
+        stopFallingEmojis();
+
+        stopFallingPhotos();
+
+        clearTimers();
+
+
+        currentTask = 0;
+
+        interfaceLocked = false;
+
+
+        showTask();
+
+    }
+
+
+    /* =========================
+       ОЧИСТКА ТАЙМЕРОВ
+    ========================= */
+
+    function clearTimers() {
+
+        activeTimers.forEach(timer => {
+
+            clearTimeout(timer);
+
+        });
+
+
+        activeTimers = [];
+
+
+        const picture = document.getElementById("wrongPicture");
+
+        if (picture) {
+            picture.remove();
+        }
+
+
+        const blocker = document.getElementById("interactionBlocker");
+
+        if (blocker) {
+            blocker.remove();
+        }
 
     }
 
