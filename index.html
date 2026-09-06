@@ -30,7 +30,6 @@
             overflow: hidden;
         }
 
-        /* Затемнение/фон */
         .page {
             width: 100%;
             height: 100%;
@@ -40,7 +39,6 @@
             position: relative;
         }
 
-        /* Главное диалоговое окно */
         .dialog {
             width: min(420px, calc(100vw - 40px));
             min-height: 210px;
@@ -84,7 +82,6 @@
             color: #f2a5cd;
         }
 
-        /* Поле ответа */
         .answer-input {
             width: 90px;
             height: 52px;
@@ -109,7 +106,6 @@
             box-shadow: 0 0 0 3px rgba(231, 139, 184, 0.12);
         }
 
-        /* Все кнопки */
         button {
             width: 100%;
             max-width: 280px;
@@ -134,7 +130,6 @@
             transform: scale(0.97);
         }
 
-        /* Активная розовая кнопка */
         .active-button {
             background: #f08fbd;
             color: #6b2760;
@@ -144,7 +139,6 @@
             background: #f5a2c9;
         }
 
-        /* Неактивная кнопка */
         button:disabled {
             background: #625b6d;
             color: #e99ac3;
@@ -152,12 +146,10 @@
             opacity: 0.9;
         }
 
-        /* Кнопка продолжить */
         #continueBtn {
             margin-top: 2px;
         }
 
-        /* Картинка после неправильного ответа */
         .wrong-picture {
             position: fixed;
 
@@ -192,7 +184,6 @@
             }
         }
 
-        /* Экран "Ща сек" */
         .wait-text {
             font-size: 26px;
             font-weight: bold;
@@ -200,7 +191,6 @@
             text-align: center;
         }
 
-        /* Финальная сцена */
         .final-dialog {
             min-height: 300px;
         }
@@ -217,7 +207,6 @@
             margin-bottom: 20px;
         }
 
-        /* Падающие эмодзи */
         .falling-item {
             position: fixed;
 
@@ -246,8 +235,8 @@
             }
         }
 
-        /* На мобильных */
         @media (max-width: 500px) {
+
             .dialog {
                 padding: 25px 20px;
             }
@@ -269,38 +258,74 @@
     <div id="app"></div>
 </div>
 
-<!-- Звуки -->
-<audio id="music1" src="assets/music1.mp3" preload="auto"></audio>
-<audio id="music2" src="assets/music2.mp3" preload="auto"></audio>
-<audio id="music3" src="assets/music3.mp3" preload="auto"></audio>
-<audio id="music4" src="assets/music4.mp3" preload="auto"></audio>
+
+<!-- ============================================================
+     ЗВУКИ
+     ============================================================ -->
+
+<audio id="musicBack"
+       src="assets/music_back.mp3"
+       preload="auto"
+       loop>
+</audio>
+
+<audio id="musicClick"
+       src="assets/music_click.mp3"
+       preload="auto">
+</audio>
+
+<audio id="music1"
+       src="assets/music1.mp3"
+       preload="auto">
+</audio>
+
+<audio id="music2"
+       src="assets/music2.mp3"
+       preload="auto">
+</audio>
+
+<audio id="music3"
+       src="assets/music3.mp3"
+       preload="auto">
+</audio>
+
+<audio id="music4"
+       src="assets/music4.mp3"
+       preload="auto">
+</audio>
+
 
 <script>
+
     /*
      * ============================================================
-     * НАСТРОЙКИ
+     * ЗАДАЧИ
      * ============================================================
      */
 
     const tasks = [
+
         {
             question: "решите задачу: 2+2 =",
             answer: "4",
             music: "music1",
             picture: "picture1.png"
         },
+
         {
             question: "решите задачу: 2*2 =",
             answer: "4",
             music: "music2",
             picture: "picture2.png"
         },
+
         {
             question: "решите задачу: 2+2**2 =",
             answer: "6",
             music: "music3",
             picture: "picture3.png"
         }
+
     ];
 
 
@@ -311,22 +336,84 @@
      */
 
     let currentTask = 0;
+
     let wrongPictureTimer = null;
+
     let waitTimer = null;
 
+    let fallingInterval = null;
 
     /*
-     * ============================================================
-     * ЭЛЕМЕНТ APP
-     * ============================================================
+     * Был ли пользователь уже взаимодействовал
+     * со страницей.
      */
+    let musicStarted = false;
+
 
     const app = document.getElementById("app");
 
 
     /*
      * ============================================================
-     * ЗАПУСК
+     * ФОНОВАЯ МУЗЫКА
+     * ============================================================
+     */
+
+    function startBackgroundMusic() {
+
+        const musicBack =
+            document.getElementById("musicBack");
+
+        if (!musicBack) {
+            return;
+        }
+
+        /*
+         * Если музыка уже играет — ничего не делаем.
+         */
+        if (!musicBack.paused) {
+            return;
+        }
+
+        const promise = musicBack.play();
+
+        if (promise !== undefined) {
+
+            promise
+                .then(() => {
+
+                    musicStarted = true;
+
+                })
+                .catch(() => {
+
+                    /*
+                     * Браузер мог заблокировать autoplay.
+                     * Следующее действие пользователя
+                     * попробует запустить музыку снова.
+                     */
+
+                });
+        }
+    }
+
+
+    /*
+     * ============================================================
+     * ЗАПУСК ФОНОВОЙ МУЗЫКИ ПРИ ПЕРВОМ ДЕЙСТВИИ
+     * ============================================================
+     */
+
+    document.addEventListener("click", startBackgroundMusic);
+
+    document.addEventListener("keydown", startBackgroundMusic);
+
+    document.addEventListener("touchstart", startBackgroundMusic);
+
+
+    /*
+     * ============================================================
+     * ПОКАЗ ПЕРВОЙ ЗАДАЧИ
      * ============================================================
      */
 
@@ -346,6 +433,7 @@
         const task = tasks[currentTask];
 
         app.innerHTML = `
+
             <div class="dialog">
 
                 <div class="question">
@@ -374,21 +462,33 @@
             </div>
         `;
 
-        const input = document.getElementById("answerInput");
-        const continueBtn = document.getElementById("continueBtn");
+
+        const input =
+            document.getElementById("answerInput");
+
+        const continueBtn =
+            document.getElementById("continueBtn");
 
 
         /*
-         * Разрешаем только одну цифру 0-9
+         * ========================================================
+         * ВВОД ОТВЕТА
+         * ========================================================
          */
+
         input.addEventListener("input", function () {
 
-            // Удаляем всё, кроме цифр
-            this.value = this.value.replace(/[^0-9]/g, "");
+            startBackgroundMusic();
 
-            // Оставляем только один символ
+            this.value =
+                this.value
+                    .replace(/[^0-9]/g, "");
+
             if (this.value.length > 1) {
-                this.value = this.value.charAt(0);
+
+                this.value =
+                    this.value.charAt(0);
+
             }
 
             checkAnswer();
@@ -396,23 +496,30 @@
 
 
         /*
-         * Дополнительная защита от ввода букв с клавиатуры
+         * ========================================================
+         * КЛАВИАТУРА
+         * ========================================================
          */
+
         input.addEventListener("keydown", function (event) {
 
             const allowedKeys = [
+
                 "Backspace",
                 "Delete",
                 "ArrowLeft",
                 "ArrowRight",
                 "Tab"
+
             ];
 
             if (
                 allowedKeys.includes(event.key) ||
                 /^[0-9]$/.test(event.key)
             ) {
+
                 return;
+
             }
 
             event.preventDefault();
@@ -420,19 +527,26 @@
 
 
         /*
-         * Проверка вставки
+         * ========================================================
+         * ВСТАВКА
+         * ========================================================
          */
+
         input.addEventListener("paste", function (event) {
 
             event.preventDefault();
 
+            startBackgroundMusic();
+
             const pastedText =
-                (event.clipboardData || window.clipboardData)
+                (event.clipboardData ||
+                 window.clipboardData)
                 .getData("text");
 
-            const digit = pastedText
-                .replace(/[^0-9]/g, "")
-                .charAt(0);
+            const digit =
+                pastedText
+                    .replace(/[^0-9]/g, "")
+                    .charAt(0);
 
             this.value = digit;
 
@@ -441,30 +555,59 @@
 
 
         /*
-         * Нажатие продолжить
+         * ========================================================
+         * КНОПКА ПРОДОЛЖИТЬ
+         * ========================================================
          */
+
         continueBtn.addEventListener("click", function () {
 
             if (this.disabled) {
                 return;
             }
 
+
+            /*
+             * Запускаем фоновую музыку,
+             * если браузер ещё не разрешил её.
+             */
+            startBackgroundMusic();
+
+
+            /*
+             * Звук клика.
+             */
+            playClickSound();
+
+
+            /*
+             * Следующая задача.
+             */
             currentTask++;
 
+
             if (currentTask >= tasks.length) {
+
                 showReadyScreen();
+
             } else {
+
                 showTask();
+
             }
+
         });
 
 
         /*
-         * Автоматически ставим курсор
+         * Автоматический фокус.
          */
         setTimeout(() => {
+
             input.focus();
+
         }, 100);
+
     }
 
 
@@ -476,153 +619,237 @@
 
     function checkAnswer() {
 
-        const input = document.getElementById("answerInput");
-        const continueBtn = document.getElementById("continueBtn");
+        const input =
+            document.getElementById("answerInput");
+
+        const continueBtn =
+            document.getElementById("continueBtn");
+
 
         if (!input || !continueBtn) {
             return;
         }
 
+
         const value = input.value;
 
+
         /*
-         * Правильный ответ
+         * ПРАВИЛЬНЫЙ ОТВЕТ
          */
+
         if (value === tasks[currentTask].answer) {
 
             continueBtn.disabled = false;
-            continueBtn.classList.add("active-button");
 
-            /*
-             * Если пользователь потом исправит ответ
-             * на неправильный — кнопка снова выключится.
-             */
+            continueBtn.classList.add(
+                "active-button"
+            );
+
             return;
         }
 
 
         /*
-         * Пока поле пустое — ничего не делаем
+         * Пустое поле.
          */
+
         if (value === "") {
 
             continueBtn.disabled = true;
-            continueBtn.classList.remove("active-button");
+
+            continueBtn.classList.remove(
+                "active-button"
+            );
 
             return;
         }
 
 
         /*
-         * Неправильный ответ
+         * НЕПРАВИЛЬНЫЙ ОТВЕТ
          */
+
         continueBtn.disabled = true;
-        continueBtn.classList.remove("active-button");
 
-        playMusic(tasks[currentTask].music);
+        continueBtn.classList.remove(
+            "active-button"
+        );
 
-        showWrongPicture(tasks[currentTask].picture);
 
         /*
-         * Очищаем поле, чтобы можно было попробовать снова
+         * Проигрываем соответствующий
+         * неправильный звук.
          */
+
+        playMusic(
+            tasks[currentTask].music
+        );
+
+
+        /*
+         * Показываем соответствующую картинку.
+         */
+
+        showWrongPicture(
+            tasks[currentTask].picture
+        );
+
+
+        /*
+         * Очищаем поле.
+         */
+
         setTimeout(() => {
 
             const currentInput =
-                document.getElementById("answerInput");
+                document.getElementById(
+                    "answerInput"
+                );
 
             if (currentInput) {
+
                 currentInput.value = "";
+
                 currentInput.focus();
+
             }
 
         }, 100);
+
     }
 
 
     /*
      * ============================================================
-     * ВОСПРОИЗВЕДЕНИЕ ЗВУКА
+     * ЗВУК АКТИВНОЙ КНОПКИ
      * ============================================================
      */
 
-    function playMusic(id) {
+    function playClickSound() {
 
-        const audio = document.getElementById(id);
+        const audio =
+            document.getElementById(
+                "musicClick"
+            );
 
         if (!audio) {
             return;
         }
 
-        /*
-         * Перематываем в начало,
-         * чтобы звук можно было запустить снова.
-         */
+
         audio.currentTime = 0;
 
-        const promise = audio.play();
 
-        /*
-         * Если браузер всё-таки заблокировал звук,
-         * просто ничего не ломаем.
-         */
+        const promise =
+            audio.play();
+
+
         if (promise !== undefined) {
+
             promise.catch(() => {});
+
         }
+
     }
 
 
     /*
      * ============================================================
-     * ПОКАЗ НЕПРАВИЛЬНОЙ КАРТИНКИ
+     * ОБЫЧНАЯ МУЗЫКА
+     * ============================================================
+     */
+
+    function playMusic(id) {
+
+        const audio =
+            document.getElementById(id);
+
+        if (!audio) {
+            return;
+        }
+
+
+        audio.currentTime = 0;
+
+
+        const promise =
+            audio.play();
+
+
+        if (promise !== undefined) {
+
+            promise.catch(() => {});
+
+        }
+
+    }
+
+
+    /*
+     * ============================================================
+     * НЕПРАВИЛЬНАЯ КАРТИНКА
      * ============================================================
      */
 
     function showWrongPicture(filename) {
 
-        clearTimeout(wrongPictureTimer);
+        clearTimeout(
+            wrongPictureTimer
+        );
 
-        /*
-         * Удаляем предыдущую картинку
-         */
+
         const oldPicture =
-            document.querySelector(".wrong-picture");
+            document.querySelector(
+                ".wrong-picture"
+            );
+
 
         if (oldPicture) {
             oldPicture.remove();
         }
 
 
-        const img = document.createElement("img");
+        const img =
+            document.createElement("img");
 
-        img.src = "assets/" + filename;
-        img.className = "wrong-picture";
 
-        /*
-         * Если картинка не загрузилась,
-         * она просто не будет отображаться.
-         */
-        img.onerror = function () {
-            this.remove();
-        };
+        img.src =
+            "assets/" + filename;
+
+
+        img.className =
+            "wrong-picture";
+
+
+        img.onerror =
+            function () {
+
+                this.remove();
+
+            };
+
 
         document.body.appendChild(img);
 
 
         /*
-         * Через 5 секунд убрать картинку
+         * Через 5 секунд убрать.
          */
-        wrongPictureTimer = setTimeout(() => {
 
-            img.remove();
+        wrongPictureTimer =
+            setTimeout(() => {
 
-        }, 5000);
+                img.remove();
+
+            }, 5000);
+
     }
 
 
     /*
      * ============================================================
-     * ЭКРАН ПОСЛЕ ТРЁХ ЗАДАЧ
+     * ПОСЛЕ ТРЁХ ЗАДАЧ
      * ============================================================
      */
 
@@ -630,7 +857,9 @@
 
         clearTimers();
 
+
         app.innerHTML = `
+
             <div class="dialog">
 
                 <div class="question">
@@ -651,18 +880,32 @@
                 </button>
 
             </div>
+
         `;
 
 
         document
             .getElementById("yesBtn")
-            .addEventListener("click", showWaitScreen);
+            .addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Звук активной кнопки.
+                     */
+                    playClickSound();
+
+                    showWaitScreen();
+
+                }
+            );
+
     }
 
 
     /*
      * ============================================================
-     * "ЩА СЕК"
+     * ЩА СЕК
      * ============================================================
      */
 
@@ -670,35 +913,44 @@
 
         clearTimers();
 
+
         app.innerHTML = `
+
             <div class="dialog">
+
                 <div class="wait-text">
                     Ща сек
                 </div>
+
             </div>
+
         `;
 
 
         /*
-         * Через 5 секунд показываем две кнопки
+         * Через 5 секунд следующий экран.
          */
-        waitTimer = setTimeout(() => {
 
-            showPaymentScreen();
+        waitTimer =
+            setTimeout(() => {
 
-        }, 5000);
+                showPaymentScreen();
+
+            }, 5000);
+
     }
 
 
     /*
      * ============================================================
-     * ЭКРАН С КНОПКАМИ
+     * ЭКРАН ОПЛАТЫ
      * ============================================================
      */
 
     function showPaymentScreen() {
 
         app.innerHTML = `
+
             <div class="dialog">
 
                 <button disabled>
@@ -715,43 +967,69 @@
                 </button>
 
             </div>
+
         `;
 
 
         document
             .getElementById("paidBtn")
-            .addEventListener("click", showFinalScreen);
+            .addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Звук активной кнопки.
+                     */
+
+                    playClickSound();
+
+
+                    /*
+                     * После этого запускаем
+                     * music4 + финальный экран.
+                     */
+
+                    showFinalScreen();
+
+                }
+            );
+
     }
 
 
     /*
      * ============================================================
-     * ФИНАЛЬНЫЙ ЭКРАН
+     * ФИНАЛ
      * ============================================================
      */
 
     function showFinalScreen() {
 
         /*
-         * Музыка 4
+         * Music4.
          */
+
         playMusic("music4");
 
 
         /*
-         * Запускаем падающие эмодзи
+         * Падающие эмодзи.
          */
+
         startFallingEmojis();
 
 
         app.innerHTML = `
+
             <div class="dialog final-dialog">
 
                 <img
                     class="final-picture"
                     src="assets/picture5.png"
                     alt=""
-                    onerror="this.style.display='none'"
+                    onerror="
+                        this.style.display='none'
+                    "
                 >
 
                 <button
@@ -762,12 +1040,32 @@
                 </button>
 
             </div>
+
         `;
 
 
         document
             .getElementById("restartBtn")
-            .addEventListener("click", restartEverything);
+            .addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Звук активной кнопки.
+                     */
+
+                    playClickSound();
+
+
+                    /*
+                     * Начинаем всё заново.
+                     */
+
+                    restartEverything();
+
+                }
+            );
+
     }
 
 
@@ -777,45 +1075,44 @@
      * ============================================================
      */
 
-    let fallingInterval = null;
-
-
     function startFallingEmojis() {
 
         stopFallingEmojis();
 
-        /*
-         * Сначала создаём несколько штук
-         */
+
         for (let i = 0; i < 18; i++) {
+
             setTimeout(() => {
+
                 createFallingEmoji();
+
             }, i * 120);
+
         }
 
 
-        /*
-         * Потом продолжаем создавать новые
-         */
-        fallingInterval = setInterval(() => {
+        fallingInterval =
+            setInterval(() => {
 
-            createFallingEmoji();
+                createFallingEmoji();
 
-        }, 300);
+            }, 300);
+
     }
 
 
     function createFallingEmoji() {
 
-        const item = document.createElement("div");
+        const item =
+            document.createElement("div");
 
-        item.className = "falling-item";
+
+        item.className =
+            "falling-item";
 
 
-        /*
-         * Apple + паутина + паук
-         */
         const emojis = [
+
             "🍎",
             "🍏",
             "🕸️",
@@ -823,57 +1120,53 @@
             "🍎",
             "🕷️",
             "🕸️"
+
         ];
 
 
         item.textContent =
-            emojis[Math.floor(Math.random() * emojis.length)];
+            emojis[
+                Math.floor(
+                    Math.random() *
+                    emojis.length
+                )
+            ];
 
 
-        /*
-         * Случайная позиция
-         */
         item.style.left =
             Math.random() * 100 + "vw";
 
 
-        /*
-         * Случайный размер
-         */
         const size =
             25 + Math.random() * 30;
 
-        item.style.fontSize = size + "px";
+
+        item.style.fontSize =
+            size + "px";
 
 
-        /*
-         * Случайная скорость
-         */
         const duration =
             3 + Math.random() * 5;
+
 
         item.style.animationDuration =
             duration + "s";
 
 
-        /*
-         * Небольшое случайное вращение
-         */
         item.style.transform =
-            `translateY(-100px) rotate(${Math.random() * 360}deg)`;
+            `translateY(-100px)
+             rotate(${Math.random() * 360}deg)`;
 
 
         document.body.appendChild(item);
 
 
-        /*
-         * Удаляем после окончания анимации
-         */
         setTimeout(() => {
 
             item.remove();
 
         }, (duration + 1) * 1000);
+
     }
 
 
@@ -881,15 +1174,23 @@
 
         if (fallingInterval) {
 
-            clearInterval(fallingInterval);
+            clearInterval(
+                fallingInterval
+            );
 
             fallingInterval = null;
+
         }
 
 
         document
-            .querySelectorAll(".falling-item")
-            .forEach(item => item.remove());
+            .querySelectorAll(
+                ".falling-item"
+            )
+            .forEach(
+                item => item.remove()
+            );
+
     }
 
 
@@ -903,28 +1204,78 @@
 
         stopFallingEmojis();
 
+
         /*
-         * Останавливаем музыку 4
+         * Останавливаем music4.
          */
+
         const music4 =
-            document.getElementById("music4");
+            document.getElementById(
+                "music4"
+            );
+
 
         if (music4) {
+
             music4.pause();
+
             music4.currentTime = 0;
+
         }
 
 
         /*
-         * Сбрасываем прогресс
+         * ========================================================
+         * ФОНОВАЯ МУЗЫКА:
+         *
+         * По твоему условию при возврате
+         * на первый этап она начинается
+         * С НАЧАЛА.
+         * ========================================================
          */
+
+        const musicBack =
+            document.getElementById(
+                "musicBack"
+            );
+
+
+        if (musicBack) {
+
+            musicBack.pause();
+
+            musicBack.currentTime = 0;
+
+        }
+
+
+        /*
+         * Сбрасываем прогресс.
+         */
+
         currentTask = 0;
 
 
         /*
-         * Первый экран
+         * Снова показываем первую задачу.
          */
+
         showTask();
+
+
+        /*
+         * Запускаем фон.
+         *
+         * Это сработает, потому что пользователь
+         * только что нажал активную кнопку.
+         */
+
+        setTimeout(() => {
+
+            startBackgroundMusic();
+
+        }, 50);
+
     }
 
 
@@ -937,23 +1288,37 @@
     function clearTimers() {
 
         if (wrongPictureTimer) {
-            clearTimeout(wrongPictureTimer);
+
+            clearTimeout(
+                wrongPictureTimer
+            );
+
             wrongPictureTimer = null;
+
         }
+
 
         if (waitTimer) {
-            clearTimeout(waitTimer);
+
+            clearTimeout(
+                waitTimer
+            );
+
             waitTimer = null;
+
         }
 
 
-        /*
-         * Убираем оставшуюся картинку
-         */
         document
-            .querySelectorAll(".wrong-picture")
-            .forEach(img => img.remove());
+            .querySelectorAll(
+                ".wrong-picture"
+            )
+            .forEach(
+                img => img.remove()
+            );
+
     }
+
 </script>
 
 </body>
