@@ -36,6 +36,10 @@
             overflow: hidden;
         }
 
+        /* =========================
+           ФОН
+           ========================= */
+
         .background-pictures {
             position: fixed;
             inset: 0;
@@ -147,6 +151,10 @@
             transform: rotate(10deg);
         }
 
+        /* =========================
+           ВИДЕО
+           ========================= */
+
         .top-video {
             position: absolute;
             left: 50%;
@@ -161,6 +169,10 @@
             z-index: 3;
             pointer-events: none;
         }
+
+        /* =========================
+           КНОПКА МУЗЫКИ
+           ========================= */
 
         .music-toggle {
             position: fixed;
@@ -182,6 +194,10 @@
         .music-toggle:hover {
             background: #403b44;
         }
+
+        /* =========================
+           ДИАЛОГ
+           ========================= */
 
         .dialog {
             width: min(420px, calc(100vw - 40px));
@@ -259,6 +275,10 @@
             margin-bottom: 22px;
         }
 
+        /* =========================
+           ОШИБКА
+           ========================= */
+
         .wrong-picture {
             position: fixed;
             left: 50%;
@@ -280,7 +300,10 @@
             cursor: not-allowed;
         }
 
-        /* Пауки и паутина */
+        /* =========================
+           ПАУКИ И ПАУТИНА
+           ========================= */
+
         .falling-item {
             position: fixed;
             top: -100px;
@@ -302,10 +325,13 @@
             }
         }
 
-        /* Медленный дождь фотографий */
+        /* =========================
+           ДОЖДЬ P1 P2 P3
+           ========================= */
+
         .falling-photo {
             position: fixed;
-            top: -180px;
+            top: -200px;
             z-index: 5;
             pointer-events: none;
             user-select: none;
@@ -323,9 +349,13 @@
             }
 
             to {
-                transform: translateY(calc(100vh + 250px));
+                transform: translateY(calc(100vh + 300px));
             }
         }
+
+        /* =========================
+           МОБИЛЬНЫЕ
+           ========================= */
 
         @media (max-width: 750px) {
             .top-video {
@@ -359,21 +389,84 @@
 
 <div class="page">
 
+    <!-- ФОН ИЗ PICTURE_BACK -->
     <div class="background-pictures">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
-        <img class="background-picture" src="assets/picture_back.jpg" alt="">
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
+        <img
+            class="background-picture"
+            src="assets/picture_back.jpg"
+            alt=""
+        >
+
     </div>
 
+    <!-- ВИДЕО -->
     <video
         id="backgroundVideo"
         class="top-video"
@@ -383,12 +476,17 @@
         playsinline
         preload="auto"
     >
-        <source src="assets/video1.mp4" type="video/mp4">
+        <source
+            src="assets/video1.mp4"
+            type="video/mp4"
+        >
     </video>
 
     <div id="app"></div>
+
 </div>
 
+<!-- КНОПКА ВКЛ/ВЫКЛ MUSIC_BACK -->
 <button
     id="musicToggle"
     class="music-toggle"
@@ -399,172 +497,355 @@
     🔊
 </button>
 
-<audio id="musicBack" loop preload="auto">
-    <source src="assets/music_back.mp3" type="audio/mpeg">
+
+<!-- =========================
+     АУДИО
+     ========================= -->
+
+<audio
+    id="musicBack"
+    loop
+    preload="auto"
+>
+    <source
+        src="assets/music_back.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
-<audio id="musicClick" preload="auto">
-    <source src="assets/music_click.mp3" type="audio/mpeg">
+<audio
+    id="musicClick"
+    preload="auto"
+>
+    <source
+        src="assets/music_click.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
-<audio id="music1" preload="auto">
-    <source src="assets/music1.mp3" type="audio/mpeg">
+<audio
+    id="music1"
+    preload="auto"
+>
+    <source
+        src="assets/music1.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
-<audio id="music2" preload="auto">
-    <source src="assets/music2.mp3" type="audio/mpeg">
+<audio
+    id="music2"
+    preload="auto"
+>
+    <source
+        src="assets/music2.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
-<audio id="music3" preload="auto">
-    <source src="assets/music3.mp3" type="audio/mpeg">
+<audio
+    id="music3"
+    preload="auto"
+>
+    <source
+        src="assets/music3.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
-<audio id="music4" preload="auto">
-    <source src="assets/music4.mp3" type="audio/mpeg">
+<audio
+    id="music4"
+    preload="auto"
+>
+    <source
+        src="assets/music4.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
-<!-- Новый звук оплаты -->
-<audio id="applePay" preload="auto">
-    <source src="assets/applepay.mp3" type="audio/mpeg">
+<!-- ЗВУК ОПЛАТЫ -->
+<audio
+    id="applePay"
+    preload="auto"
+>
+    <source
+        src="assets/applepay.mp3"
+        type="audio/mpeg"
+    >
 </audio>
+
 
 <script>
+
+    /* =========================
+       ЗАДАЧИ
+       ========================= */
+
     const tasks = [
+
         {
             question: "реши задачу: 2+2 =",
             answer: "4",
             music: "music1",
             picture: "assets/picture1.jpg"
         },
+
         {
-            question: "реши еще задачу: 2*2 =",
+            question: "еще одну: 2*2 =",
             answer: "4",
             music: "music2",
             picture: "assets/picture2.jpg"
         },
+
         {
-            question: "хахах бля последняя: 2+2**2 =",
+            question: "ахаха бля последняя: 2+2**2 =",
             answer: "6",
             music: "music3",
             picture: "assets/picture3.jpg"
         }
+
     ];
 
+
+    /* =========================
+       СОСТОЯНИЕ
+       ========================= */
+
     let currentTask = 0;
+
     let interfaceLocked = false;
 
     let fallingInterval = null;
+
     let fallingStopTimer = null;
+
     let photoFallingInterval = null;
 
     let activeTimers = [];
 
-    const app = document.getElementById("app");
 
-    const musicBack = document.getElementById("musicBack");
-    const musicClick = document.getElementById("musicClick");
-    const applePay = document.getElementById("applePay");
-    const musicToggle = document.getElementById("musicToggle");
+    /* =========================
+       ЭЛЕМЕНТЫ
+       ========================= */
+
+    const app =
+        document.getElementById("app");
+
+    const musicBack =
+        document.getElementById("musicBack");
+
+    const musicClick =
+        document.getElementById("musicClick");
+
+    const applePay =
+        document.getElementById("applePay");
+
+    const musicToggle =
+        document.getElementById("musicToggle");
+
 
     let musicBackEnabled = true;
 
+
+    /* =========================
+       MUSIC_BACK
+       ========================= */
+
     function startBackgroundMusic() {
+
         if (!musicBackEnabled) {
             return;
         }
 
         musicBack.volume = 0.35;
 
-        musicBack.play().catch(() => {});
+        musicBack
+            .play()
+            .catch(() => {});
     }
 
-    function playClickSound() {
-        musicClick.currentTime = 0;
-        musicClick.volume = 0.7;
-        musicClick.play().catch(() => {});
-    }
-
-    /* Звук Apple Pay */
-    function playApplePaySound() {
-        applePay.currentTime = 0;
-        applePay.volume = 1;
-
-        applePay.play().catch(() => {});
-    }
 
     function toggleBackgroundMusic() {
+
         if (musicBackEnabled) {
+
             musicBackEnabled = false;
+
             musicBack.pause();
 
             musicToggle.textContent = "🔇";
-            musicToggle.title = "Включить музыку";
+
+            musicToggle.title =
+                "Включить музыку";
+
             musicToggle.setAttribute(
                 "aria-label",
                 "Включить музыку"
             );
+
         } else {
+
             musicBackEnabled = true;
+
             startBackgroundMusic();
 
             musicToggle.textContent = "🔊";
-            musicToggle.title = "Выключить музыку";
+
+            musicToggle.title =
+                "Выключить музыку";
+
             musicToggle.setAttribute(
                 "aria-label",
-                "Включить музыку"
+                "Выключить музыку"
             );
         }
     }
 
-    musicToggle.addEventListener("click", (event) => {
-        event.stopPropagation();
-        toggleBackgroundMusic();
-    });
 
-    document.addEventListener("click", () => {
-        if (musicBackEnabled && musicBack.paused) {
-            startBackgroundMusic();
-        }
-    });
+    musicToggle.addEventListener(
+        "click",
+        (event) => {
 
-    document.addEventListener("keydown", () => {
-        if (musicBackEnabled && musicBack.paused) {
-            startBackgroundMusic();
+            event.stopPropagation();
+
+            toggleBackgroundMusic();
         }
-    });
+    );
+
+
+    /*
+     * Если браузер заблокировал
+     * автоматическое воспроизведение,
+     * пробуем включить музыку
+     * после взаимодействия.
+     */
+
+    document.addEventListener(
+        "click",
+        () => {
+
+            if (
+                musicBackEnabled &&
+                musicBack.paused
+            ) {
+                startBackgroundMusic();
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        () => {
+
+            if (
+                musicBackEnabled &&
+                musicBack.paused
+            ) {
+                startBackgroundMusic();
+            }
+
+        }
+    );
+
+
+    /* =========================
+       MUSIC_CLICK
+       ========================= */
+
+    function playClickSound() {
+
+        musicClick.currentTime = 0;
+
+        musicClick.volume = 0.7;
+
+        musicClick
+            .play()
+            .catch(() => {});
+    }
+
+
+    /* =========================
+       APPLE PAY
+       ========================= */
+
+    function playApplePaySound() {
+
+        applePay.currentTime = 0;
+
+        applePay.volume = 1;
+
+        applePay
+            .play()
+            .catch(() => {});
+    }
+
+
+    /* =========================
+       ТАЙМЕРЫ
+       ========================= */
 
     function clearTimers() {
-        activeTimers.forEach(timer => {
-            clearTimeout(timer);
-        });
+
+        activeTimers.forEach(
+            timer => clearTimeout(timer)
+        );
 
         activeTimers = [];
     }
 
+
+    /* =========================
+       УБОРКА ОШИБКИ
+       ========================= */
+
     function removeWrongScreen() {
-        const picture = document.querySelector(".wrong-picture");
-        const blocker = document.querySelector(".interaction-blocker");
+
+        const picture =
+            document.querySelector(
+                ".wrong-picture"
+            );
+
+        const blocker =
+            document.querySelector(
+                ".interaction-blocker"
+            );
+
 
         if (picture) {
             picture.remove();
         }
+
 
         if (blocker) {
             blocker.remove();
         }
     }
 
+
+    /* =========================
+       ПОКАЗ ЗАДАЧИ
+       ========================= */
+
     function showTask() {
+
         interfaceLocked = false;
+
         removeWrongScreen();
 
-        const task = tasks[currentTask];
+        const task =
+            tasks[currentTask];
+
 
         app.innerHTML = `
+
             <div class="dialog">
+
                 <div class="question">
                     ${task.question}
                 </div>
+
 
                 <input
                     id="answerInput"
@@ -575,6 +856,7 @@
                     autocomplete="off"
                 >
 
+
                 <button
                     id="continueButton"
                     class="button"
@@ -583,127 +865,280 @@
                 >
                     ПРОДОЛЖИТЬ
                 </button>
+
             </div>
+
         `;
 
-        const input = document.getElementById("answerInput");
-        const button = document.getElementById("continueButton");
+
+        const input =
+            document.getElementById(
+                "answerInput"
+            );
+
+
+        const button =
+            document.getElementById(
+                "continueButton"
+            );
+
 
         input.focus();
 
-        input.addEventListener("input", () => {
-            if (interfaceLocked) {
-                return;
+
+        input.addEventListener(
+            "input",
+            () => {
+
+                if (interfaceLocked) {
+                    return;
+                }
+
+
+                /*
+                 * Только одна цифра 0–9.
+                 */
+
+                input.value =
+                    input.value
+                        .replace(/[^0-9]/g, "")
+                        .slice(0, 1);
+
+
+                button.disabled =
+                    input.value !== task.answer;
+
             }
+        );
 
-            input.value = input.value
-                .replace(/[^0-9]/g, "")
-                .slice(0, 1);
 
-            button.disabled =
-                input.value !== task.answer;
-        });
+        input.addEventListener(
+            "keydown",
+            (event) => {
 
-        input.addEventListener("keydown", (event) => {
-            if (interfaceLocked) {
-                event.preventDefault();
-                return;
+                if (interfaceLocked) {
+
+                    event.preventDefault();
+
+                    return;
+                }
+
+
+                if (
+                    event.key === "Enter" &&
+                    input.value === task.answer
+                ) {
+
+                    event.preventDefault();
+
+                    checkAnswer();
+
+                }
+
             }
+        );
 
-            if (
-                event.key === "Enter" &&
-                input.value === task.answer
-            ) {
-                event.preventDefault();
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                if (interfaceLocked) {
+                    return;
+                }
+
                 checkAnswer();
-            }
-        });
 
-        button.addEventListener("click", () => {
-            if (interfaceLocked) {
-                return;
             }
-
-            checkAnswer();
-        });
+        );
     }
 
+
+    /* =========================
+       ПРОВЕРКА ОТВЕТА
+       ========================= */
+
     function checkAnswer() {
+
         if (interfaceLocked) {
             return;
         }
 
-        const task = tasks[currentTask];
-        const input = document.getElementById("answerInput");
+
+        const task =
+            tasks[currentTask];
+
+
+        const input =
+            document.getElementById(
+                "answerInput"
+            );
+
 
         if (!input) {
             return;
         }
 
-        if (input.value === task.answer) {
+
+        /*
+         * ПРАВИЛЬНЫЙ ОТВЕТ
+         */
+
+        if (
+            input.value === task.answer
+        ) {
+
             playClickSound();
 
             startFallingEmojis();
 
             currentTask++;
 
-            if (currentTask < tasks.length) {
+
+            if (
+                currentTask <
+                tasks.length
+            ) {
+
                 showTask();
+
             } else {
+
                 showReadyScreen();
+
             }
 
             return;
         }
 
+
+        /*
+         * НЕПРАВИЛЬНЫЙ ОТВЕТ
+         */
+
         showWrongAnswer(task);
     }
 
+
+    /* =========================
+       НЕПРАВИЛЬНЫЙ ОТВЕТ
+       ========================= */
+
     function showWrongAnswer(task) {
+
         interfaceLocked = true;
 
-        const music = document.getElementById(task.music);
+
+        /*
+         * Проигрываем
+         * music1 / music2 / music3
+         */
+
+        const music =
+            document.getElementById(
+                task.music
+            );
+
 
         if (music) {
+
             music.currentTime = 0;
+
             music.volume = 1;
-            music.play().catch(() => {});
+
+            music
+                .play()
+                .catch(() => {});
         }
 
-        const blocker = document.createElement("div");
-        blocker.className = "interaction-blocker";
 
-        document.body.appendChild(blocker);
+        /*
+         * Полностью блокируем
+         * страницу на 3 секунды.
+         */
 
-        const picture = document.createElement("img");
+        const blocker =
+            document.createElement("div");
 
-        picture.className = "wrong-picture";
-        picture.src = task.picture;
+        blocker.className =
+            "interaction-blocker";
+
+        document.body.appendChild(
+            blocker
+        );
+
+
+        /*
+         * Показываем
+         * соответствующую картинку.
+         */
+
+        const picture =
+            document.createElement("img");
+
+        picture.className =
+            "wrong-picture";
+
+        picture.src =
+            task.picture;
+
         picture.alt = "";
 
-        document.body.appendChild(picture);
+        document.body.appendChild(
+            picture
+        );
 
-        const timer = setTimeout(() => {
-            removeWrongScreen();
-            interfaceLocked = false;
 
-            const input = document.getElementById("answerInput");
+        /*
+         * Ровно через 3 секунды
+         * всё исчезает.
+         */
 
-            if (input) {
-                input.value = "";
-                input.focus();
-            }
-        }, 3000);
+        const timer =
+            setTimeout(
+                () => {
+
+                    removeWrongScreen();
+
+                    interfaceLocked = false;
+
+
+                    const input =
+                        document.getElementById(
+                            "answerInput"
+                        );
+
+
+                    if (input) {
+
+                        input.value = "";
+
+                        input.focus();
+                    }
+
+                },
+                3000
+            );
+
 
         activeTimers.push(timer);
     }
 
+
+    /* =========================
+       ЭКРАН ГОТОВНОСТИ
+       ========================= */
+
     function showReadyScreen() {
+
         app.innerHTML = `
+
             <div class="dialog">
+
                 <div class="message">
                     Вы точно готовы узнать это?
                 </div>
+
 
                 <button
                     id="yesButton"
@@ -713,7 +1148,9 @@
                     ДА
                 </button>
 
+
                 <div style="height: 10px;"></div>
+
 
                 <button
                     class="button"
@@ -722,42 +1159,77 @@
                 >
                     НЕТ МНЕ ПОХ
                 </button>
+
             </div>
+
         `;
+
 
         document
             .getElementById("yesButton")
-            .addEventListener("click", () => {
-                playClickSound();
+            .addEventListener(
+                "click",
+                () => {
 
-                startFallingEmojis();
+                    playClickSound();
 
-                showWaitScreen();
-            });
+                    startFallingEmojis();
+
+                    showWaitScreen();
+
+                }
+            );
     }
 
+
+    /* =========================
+       ЩА СЕК
+       ========================= */
+
     function showWaitScreen() {
+
         app.innerHTML = `
+
             <div class="dialog">
+
                 <div class="message">
-                    Ща сек
+                    Ща сек, ой загрузка...
                 </div>
+
             </div>
+
         `;
 
-        const timer = setTimeout(() => {
-            showPaymentScreen();
-        }, 5000);
+
+        const timer =
+            setTimeout(
+                () => {
+
+                    showPaymentScreen();
+
+                },
+                5000
+            );
+
 
         activeTimers.push(timer);
     }
 
+
+    /* =========================
+       ОПЛАТА
+       ========================= */
+
     function showPaymentScreen() {
+
         app.innerHTML = `
+
             <div class="dialog">
+
                 <div class="message">
-                    Бля ща сек, ой загрузка...
+                    ты почти у цели))
                 </div>
+
 
                 <button
                     class="button"
@@ -767,7 +1239,9 @@
                     УЗНАТЬ БЕСПЛАТНО
                 </button>
 
+
                 <div style="height: 10px;"></div>
+
 
                 <button
                     id="paidButton"
@@ -776,41 +1250,79 @@
                 >
                     УЗНАТЬ ЗА 10 ГРЫВЕНЬ
                 </button>
+
             </div>
+
         `;
+
 
         document
             .getElementById("paidButton")
-            .addEventListener("click", () => {
+            .addEventListener(
+                "click",
+                () => {
 
-                /* Звук нажатия */
-                playClickSound();
+                    /*
+                     * ВАЖНО:
+                     * music_click.mp3 здесь НЕ запускается.
+                     */
 
-                /* Звук Apple Pay */
-                playApplePaySound();
+                    playApplePaySound();
 
-                /* Убираем пауков */
-                stopFallingEmojis();
 
-                /* Запускаем дождь фотографий */
-                startFallingPhotos();
+                    /*
+                     * Пауки исчезают.
+                     */
 
-                /* Переходим к финалу */
-                showFinalScreen();
-            });
+                    stopFallingEmojis();
+
+
+                    /*
+                     * Запускаем дождь.
+                     */
+
+                    startFallingPhotos();
+
+
+                    /*
+                     * Финальный экран.
+                     */
+
+                    showFinalScreen();
+
+                }
+            );
     }
 
+
+    /* =========================
+       ФИНАЛ
+       ========================= */
+
     function showFinalScreen() {
-        const music4 = document.getElementById("music4");
+
+        const music4 =
+            document.getElementById(
+                "music4"
+            );
+
 
         if (music4) {
+
             music4.currentTime = 0;
+
             music4.volume = 1;
-            music4.play().catch(() => {});
+
+            music4
+                .play()
+                .catch(() => {});
         }
 
+
         app.innerHTML = `
+
             <div class="dialog">
+
                 <img
                     src="assets/picture5.jpg"
                     alt=""
@@ -823,6 +1335,7 @@
                     "
                 >
 
+
                 <button
                     id="finalButton"
                     class="button active"
@@ -830,180 +1343,378 @@
                 >
                     бля спасибо нахуй
                 </button>
+
             </div>
+
         `;
+
 
         document
             .getElementById("finalButton")
-            .addEventListener("click", () => {
-                playClickSound();
+            .addEventListener(
+                "click",
+                () => {
 
-                stopFallingPhotos();
-                stopFallingEmojis();
+                    playClickSound();
 
-                restartEverything();
-            });
+                    stopFallingPhotos();
+
+                    stopFallingEmojis();
+
+                    restartEverything();
+
+                }
+            );
     }
 
-    /*
-     * Пауки и паутина — ровно 3 секунды.
-     */
+
+    /* =========================
+       ПАУКИ / ПАУТИНА
+       =========================
+       
+       Весь эффект длится ровно 3 секунды.
+       ========================= */
+
     function startFallingEmojis() {
+
         stopFallingPhotos();
+
         stopFallingEmojis();
 
+
         const emojis = [
+
             "🕷️",
             "🕸️",
             "🕷",
             "🕸",
             "🕷️"
+
         ];
 
-        function createFallingEmoji() {
-            const item = document.createElement("div");
 
-            item.className = "falling-item";
+        function createFallingEmoji() {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "falling-item";
+
 
             item.textContent =
-                emojis[Math.floor(Math.random() * emojis.length)];
+                emojis[
+                    Math.floor(
+                        Math.random() *
+                        emojis.length
+                    )
+                ];
+
 
             const size =
-                24 + Math.random() * 30;
+                24 +
+                Math.random() * 30;
+
 
             const duration =
-                3 + Math.random() * 4;
+                3 +
+                Math.random() * 4;
+
 
             item.style.left =
-                Math.random() * 100 + "vw";
+                Math.random() * 100 +
+                "vw";
+
 
             item.style.fontSize =
                 size + "px";
 
+
             item.style.animationDuration =
                 duration + "s";
 
-            document.body.appendChild(item);
+
+            document.body.appendChild(
+                item
+            );
         }
+
 
         createFallingEmoji();
 
-        fallingInterval = setInterval(() => {
-            createFallingEmoji();
-        }, 350);
 
-        fallingStopTimer = setTimeout(() => {
-            stopFallingEmojis();
-        }, 3000);
+        fallingInterval =
+            setInterval(
+                () => {
+
+                    createFallingEmoji();
+
+                },
+                350
+            );
+
+
+        /*
+         * Ровно через 3 секунды
+         * полностью прекращаем эффект.
+         */
+
+        fallingStopTimer =
+            setTimeout(
+                () => {
+
+                    stopFallingEmojis();
+
+                },
+                3000
+            );
     }
 
+
     function stopFallingEmojis() {
+
         if (fallingInterval) {
-            clearInterval(fallingInterval);
+
+            clearInterval(
+                fallingInterval
+            );
+
             fallingInterval = null;
         }
 
+
         if (fallingStopTimer) {
-            clearTimeout(fallingStopTimer);
+
+            clearTimeout(
+                fallingStopTimer
+            );
+
             fallingStopTimer = null;
         }
 
+
         document
-            .querySelectorAll(".falling-item")
-            .forEach(item => item.remove());
+            .querySelectorAll(
+                ".falling-item"
+            )
+            .forEach(
+                item => item.remove()
+            );
     }
 
-    /*
-     * Медленный дождь p1/p2/p3.
-     */
+
+    /* =========================
+       ДОЖДЬ P1 / P2 / P3
+       ========================= */
+
     function startFallingPhotos() {
+
         stopFallingPhotos();
 
+
         const photos = [
+
             "assets/p1.jpg",
             "assets/p2.jpg",
             "assets/p3.jpg"
+
         ];
+
 
         let photoIndex = 0;
 
-        function createFallingPhoto() {
-            const image = document.createElement("img");
 
-            image.className = "falling-photo";
-            image.src = photos[photoIndex];
+        function createFallingPhoto() {
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "falling-photo";
+
+
+            image.src =
+                photos[photoIndex];
+
 
             photoIndex =
-                (photoIndex + 1) % photos.length;
+                (
+                    photoIndex + 1
+                ) %
+                photos.length;
 
-            /* Крупные картинки */
+
+            /*
+             * Большой размер,
+             * чтобы текст хорошо читался.
+             */
+
             const size =
-                110 + Math.random() * 40;
+                110 +
+                Math.random() * 40;
 
-            image.style.width = size + "px";
-            image.style.height = "auto";
+
+            image.style.width =
+                size + "px";
+
+
+            image.style.height =
+                "auto";
+
+
+            /*
+             * Случайное положение
+             * по горизонтали.
+             */
 
             const maxLeft =
-                Math.max(0, window.innerWidth - size);
+                Math.max(
+                    0,
+                    window.innerWidth - size
+                );
+
 
             image.style.left =
-                Math.random() * maxLeft + "px";
+                Math.random() *
+                maxLeft +
+                "px";
 
-            /* Медленное падение: 9–13 секунд */
+
+            /*
+             * Очень медленное падение:
+             * 9–13 секунд.
+             */
+
             const duration =
-                9 + Math.random() * 4;
+                9 +
+                Math.random() * 4;
+
 
             image.style.animationDuration =
                 duration + "s";
 
-            document.body.appendChild(image);
 
-            image.addEventListener("animationend", () => {
-                image.remove();
-            });
+            /*
+             * Никакого вращения.
+             */
+
+            document.body.appendChild(
+                image
+            );
+
+
+            image.addEventListener(
+                "animationend",
+                () => {
+
+                    image.remove();
+
+                }
+            );
         }
+
+
+        /*
+         * Первая картинка сразу.
+         */
 
         createFallingPhoto();
 
-        photoFallingInterval = setInterval(() => {
-            createFallingPhoto();
-        }, 700);
+
+        /*
+         * Затем спокойный дождь.
+         */
+
+        photoFallingInterval =
+            setInterval(
+                () => {
+
+                    createFallingPhoto();
+
+                },
+                700
+            );
     }
 
+
     function stopFallingPhotos() {
+
         if (photoFallingInterval) {
-            clearInterval(photoFallingInterval);
+
+            clearInterval(
+                photoFallingInterval
+            );
+
             photoFallingInterval = null;
         }
 
+
         document
-            .querySelectorAll(".falling-photo")
-            .forEach(photo => photo.remove());
+            .querySelectorAll(
+                ".falling-photo"
+            )
+            .forEach(
+                photo => photo.remove()
+            );
     }
 
+
+    /* =========================
+       ПЕРЕЗАПУСК
+       ========================= */
+
     function restartEverything() {
+
         stopFallingEmojis();
+
         stopFallingPhotos();
 
         clearTimers();
+
         removeWrongScreen();
 
+
         currentTask = 0;
+
         interfaceLocked = false;
+
 
         showTask();
     }
 
-    window.addEventListener("load", () => {
-        const video =
-            document.getElementById("backgroundVideo");
 
-        video.play().catch(() => {});
+    /* =========================
+       ЗАПУСК
+       ========================= */
 
-        startBackgroundMusic();
+    window.addEventListener(
+        "load",
+        () => {
 
-        showTask();
-    });
+            const video =
+                document.getElementById(
+                    "backgroundVideo"
+                );
+
+
+            video
+                .play()
+                .catch(() => {});
+
+
+            startBackgroundMusic();
+
+            showTask();
+
+        }
+    );
+
 </script>
 
 </body>
