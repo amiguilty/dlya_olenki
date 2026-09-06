@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -53,76 +54,6 @@
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
             z-index: 3;
             pointer-events: none;
-        }
-
-        /* =========================
-           КОМПОЗИЦИЯ СПРАВА
-        ========================= */
-
-        .picture-dick {
-            position: absolute;
-            left: calc(50% + 235px);
-            top: 50%;
-            width: 150px;
-            height: 280px;
-            transform: translateY(-50%);
-            z-index: 2;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .picture-dick img {
-            position: absolute;
-            width: 48px;
-            height: 48px;
-            object-fit: cover;
-            border-radius: 7px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-        }
-
-        .picture-dick .pic1 {
-            left: 51px;
-            top: 0;
-        }
-
-        .picture-dick .pic2 {
-            left: 51px;
-            top: 52px;
-        }
-
-        .picture-dick .pic3 {
-            left: 27px;
-            top: 104px;
-        }
-
-        .picture-dick .pic4 {
-            left: 75px;
-            top: 104px;
-        }
-
-        .picture-dick .pic5 {
-            left: 3px;
-            top: 156px;
-        }
-
-        .picture-dick .pic6 {
-            left: 51px;
-            top: 156px;
-        }
-
-        .picture-dick .pic7 {
-            left: 99px;
-            top: 156px;
-        }
-
-        .picture-dick .pic8 {
-            left: 51px;
-            top: 208px;
-        }
-
-        .picture-dick .pic9 {
-            left: 51px;
-            top: 260px;
         }
 
         /* =========================
@@ -187,8 +118,6 @@
             transition: 0.15s;
         }
 
-        /* АКТИВНАЯ КНОПКА */
-
         button.active {
             background: #f06ba9;
             color: #652c60;
@@ -198,8 +127,6 @@
             background: #ff79b7;
             transform: scale(1.02);
         }
-
-        /* НЕАКТИВНАЯ КНОПКА */
 
         button:disabled {
             background: #5b5263;
@@ -225,7 +152,6 @@
             z-index: 100;
         }
 
-        /* Полностью блокирует клики и ввод */
         .interaction-blocker {
             position: fixed;
             inset: 0;
@@ -235,7 +161,7 @@
         }
 
         /* =========================
-           ПАДАЮЩИЕ ПАУКИ
+           ПАДАЮЩИЕ ПАУКИ / ПАУТИНЫ
         ========================= */
 
         .falling-item {
@@ -265,25 +191,27 @@
 
         .falling-photo {
             position: fixed;
-            top: -100px;
+            top: -120px;
             z-index: 5;
             pointer-events: none;
             user-select: none;
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.45);
-            animation-name: photoFall;
+
+            /* Без вращения */
+            animation-name: photoRain;
             animation-timing-function: linear;
             animation-fill-mode: forwards;
         }
 
-        @keyframes photoFall {
+        @keyframes photoRain {
             from {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0);
             }
 
             to {
-                transform: translateY(115vh) rotate(360deg);
+                transform: translateY(115vh);
             }
         }
 
@@ -292,10 +220,6 @@
         ========================= */
 
         @media (max-width: 750px) {
-            .picture-dick {
-                display: none;
-            }
-
             .top-video {
                 width: 190px;
                 height: 107px;
@@ -318,7 +242,7 @@
 
 <div class="page">
 
-    <!-- ВИДЕО -->
+    <!-- ВИДЕО СВЕРХУ -->
     <video
         id="backgroundVideo"
         class="top-video"
@@ -331,20 +255,7 @@
         <source src="assets/video1.mp4" type="video/mp4">
     </video>
 
-    <!-- КАРТИНКИ СПРАВА -->
-    <div class="picture-dick">
-        <img class="pic1" src="assets/picture_back.jpg">
-        <img class="pic2" src="assets/picture_back.jpg">
-        <img class="pic3" src="assets/picture_back.jpg">
-        <img class="pic4" src="assets/picture_back.jpg">
-        <img class="pic5" src="assets/picture_back.jpg">
-        <img class="pic6" src="assets/picture_back.jpg">
-        <img class="pic7" src="assets/picture_back.jpg">
-        <img class="pic8" src="assets/picture_back.jpg">
-        <img class="pic9" src="assets/picture_back.jpg">
-    </div>
-
-    <!-- СЮДА ПОПАДАЕТ ДИАЛОГ -->
+    <!-- ДИАЛОГ -->
     <div id="app"></div>
 
 </div>
@@ -418,26 +329,22 @@
 
 
     /* =========================
-       ЭЛЕМЕНТЫ АУДИО
+       АУДИО
     ========================= */
 
     const musicBack = document.getElementById("musicBack");
     const musicClick = document.getElementById("musicClick");
-    const music1 = document.getElementById("music1");
-    const music2 = document.getElementById("music2");
-    const music3 = document.getElementById("music3");
-    const music4 = document.getElementById("music4");
-
-    const backgroundVideo = document.getElementById("backgroundVideo");
 
 
     /* =========================
-       ЗАПУСК ВИДЕО
+       ЗАПУСК
     ========================= */
 
     window.addEventListener("load", () => {
 
-        backgroundVideo.play().catch(() => {});
+        const video = document.getElementById("backgroundVideo");
+
+        video.play().catch(() => {});
 
         startBackgroundMusic();
 
@@ -454,12 +361,8 @@
 
         musicBack.volume = 0.35;
 
-        musicBack.play().catch(() => {
+        musicBack.play().catch(() => {});
 
-            // Браузер мог заблокировать autoplay со звуком.
-            // Попробуем снова после первого взаимодействия.
-
-        });
     }
 
 
@@ -469,7 +372,7 @@
             musicBack.play().catch(() => {});
         }
 
-    }, { once: false });
+    });
 
 
     document.addEventListener("keydown", () => {
@@ -478,7 +381,7 @@
             musicBack.play().catch(() => {});
         }
 
-    }, { once: false });
+    });
 
 
     /* =========================
@@ -527,7 +430,7 @@
         const button = document.getElementById("continueButton");
 
 
-        /* Только одна цифра 0-9 */
+        /* Только одна цифра */
 
         input.addEventListener("input", () => {
 
@@ -535,12 +438,39 @@
                 return;
             }
 
-            input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
+            input.value =
+                input.value
+                    .replace(/[^0-9]/g, "")
+                    .slice(0, 1);
 
-            button.disabled = input.value !== task.answer;
+
+            button.disabled =
+                input.value !== task.answer;
 
         });
 
+
+        /* Проверка неправильного ответа */
+
+        input.addEventListener("input", () => {
+
+            if (interfaceLocked) {
+                return;
+            }
+
+            if (
+                input.value.length === 1 &&
+                input.value !== task.answer
+            ) {
+
+                checkAnswer();
+
+            }
+
+        });
+
+
+        /* Enter */
 
         input.addEventListener("keydown", (event) => {
 
@@ -560,6 +490,8 @@
         });
 
 
+        /* Продолжить */
+
         button.addEventListener("click", () => {
 
             if (button.disabled || interfaceLocked) {
@@ -569,13 +501,14 @@
             playClickSound();
 
             /*
-             * После каждого активного продолжения
-             * запускаем пауков/паутину.
+             * После каждого активного клика
+             * пауки/паутинки падают 3 секунды.
              */
             startFallingEmojis();
 
 
             currentTask++;
+
 
             if (currentTask < tasks.length) {
 
@@ -617,19 +550,12 @@
             return;
         }
 
-        const value = input.value;
-
         const task = tasks[currentTask];
 
-
-        if (value === task.answer) {
-
+        if (input.value === task.answer) {
             return;
-
         }
 
-
-        /* Неправильный ответ */
 
         playMusic(task.music);
 
@@ -639,42 +565,7 @@
 
 
     /* =========================
-       ОБРАБОТКА НЕПРАВИЛЬНОГО
-       ОТВЕТА
-    ========================= */
-
-    function setupWrongAnswerListener() {
-
-        document.addEventListener("input", () => {
-
-            if (interfaceLocked) {
-                return;
-            }
-
-            const input = document.getElementById("answerInput");
-
-            if (!input) {
-                return;
-            }
-
-            const task = tasks[currentTask];
-
-            if (input.value.length === 1 && input.value !== task.answer) {
-
-                checkAnswer();
-
-            }
-
-        });
-
-    }
-
-
-    setupWrongAnswerListener();
-
-
-    /* =========================
-       КНОПКА / КЛИК
+       КЛИК
     ========================= */
 
     function playClickSound() {
@@ -718,12 +609,15 @@
         const input = document.getElementById("answerInput");
 
         if (input) {
+
             input.disabled = true;
+
             input.blur();
+
         }
 
 
-        /* Блокировка всего интерфейса */
+        /* Блокируем весь экран */
 
         const blocker = document.createElement("div");
 
@@ -734,7 +628,7 @@
         document.body.appendChild(blocker);
 
 
-        /* Картинка */
+        /* Показываем картинку */
 
         const img = document.createElement("img");
 
@@ -748,17 +642,17 @@
 
 
         /*
-         * Через РОВНО 3000 мс
-         * картинка исчезает,
-         * блокировка снимается,
-         * можно вводить ответ снова.
+         * Через 3 секунды всё возвращается.
          */
 
         const timer = setTimeout(() => {
 
-            const picture = document.getElementById("wrongPicture");
+            const picture =
+                document.getElementById("wrongPicture");
 
-            const block = document.getElementById("interactionBlocker");
+            const block =
+                document.getElementById("interactionBlocker");
+
 
             if (picture) {
                 picture.remove();
@@ -772,7 +666,9 @@
             interfaceLocked = false;
 
 
-            const newInput = document.getElementById("answerInput");
+            const newInput =
+                document.getElementById("answerInput");
+
 
             if (newInput) {
 
@@ -793,7 +689,7 @@
 
 
     /* =========================
-       ЭКРАН "ВЫ ГОТОВЫ?"
+       "ВЫ ТОЧНО ГОТОВЫ?"
     ========================= */
 
     function showReadyScreen() {
@@ -825,7 +721,8 @@
         `;
 
 
-        const yesButton = document.getElementById("yesButton");
+        const yesButton =
+            document.getElementById("yesButton");
 
 
         yesButton.addEventListener("click", () => {
@@ -846,7 +743,7 @@
 
 
     /* =========================
-       ЭКРАН "ЩА СЕК"
+       "ЩА СЕК"
     ========================= */
 
     function showWaitScreen() {
@@ -878,7 +775,7 @@
 
 
     /* =========================
-       ЭКРАН ОПЛАТЫ
+       ОПЛАТА
     ========================= */
 
     function showPaymentScreen() {
@@ -910,7 +807,8 @@
         `;
 
 
-        const paidButton = document.getElementById("paidButton");
+        const paidButton =
+            document.getElementById("paidButton");
 
 
         paidButton.addEventListener("click", () => {
@@ -921,10 +819,12 @@
 
             playClickSound();
 
+
             /*
-             * Пауки/паутинки убираем.
-             * Вместо них запускаем фотографии.
+             * Пауки заканчиваются.
+             * Начинается дождь из фотографий.
              */
+
             stopFallingEmojis();
 
             startFallingPhotos();
@@ -937,7 +837,7 @@
 
 
     /* =========================
-       ФИНАЛЬНЫЙ ЭКРАН
+       ФИНАЛ
     ========================= */
 
     function showFinalScreen() {
@@ -973,7 +873,8 @@
         `;
 
 
-        const finalButton = document.getElementById("finalButton");
+        const finalButton =
+            document.getElementById("finalButton");
 
 
         finalButton.addEventListener("click", () => {
@@ -984,14 +885,18 @@
 
             playClickSound();
 
-            /*
-             * Останавливаем падающие фотографии.
-             */
-            stopFallingPhotos();
 
             /*
-             * Возвращаем всё в самое начало.
+             * Останавливаем дождь.
              */
+
+            stopFallingPhotos();
+
+
+            /*
+             * Начинаем всё сначала.
+             */
+
             restartEverything();
 
         });
@@ -1000,14 +905,12 @@
 
 
     /* =========================
-       ПАДАЮЩИЕ ПАУКИ / ПАУТИНЫ
+       ПАУКИ / ПАУТИНКИ
+       ПАДАЮТ ТОЛЬКО 3 СЕКУНДЫ
     ========================= */
 
     function startFallingEmojis() {
 
-        /*
-         * На всякий случай убираем падающие фотографии.
-         */
         stopFallingPhotos();
 
         stopFallingEmojis();
@@ -1024,33 +927,67 @@
         fallingInterval = setInterval(() => {
 
             createFallingEmoji(
-                emojis[Math.floor(Math.random() * emojis.length)]
+                emojis[
+                    Math.floor(
+                        Math.random() * emojis.length
+                    )
+                ]
             );
 
         }, 350);
+
+
+        /*
+         * Через 3 секунды полностью
+         * прекращаем создание новых.
+         */
+
+        const timer = setTimeout(() => {
+
+            stopFallingEmojis();
+
+        }, 3000);
+
+
+        activeTimers.push(timer);
 
     }
 
 
     function createFallingEmoji(emoji) {
 
-        const item = document.createElement("div");
+        const item =
+            document.createElement("div");
+
 
         item.className = "falling-item";
 
         item.textContent = emoji;
 
 
-        const size = 24 + Math.random() * 30;
-
-        item.style.fontSize = size + "px";
-
-        item.style.left = Math.random() * 100 + "vw";
+        const size =
+            24 + Math.random() * 30;
 
 
-        const duration = 3 + Math.random() * 4;
+        item.style.fontSize =
+            size + "px";
 
-        item.style.animationDuration = duration + "s";
+
+        item.style.left =
+            Math.random() * 100 + "vw";
+
+
+        /*
+         * Та же скорость:
+         * 3-7 секунд падения.
+         */
+
+        const duration =
+            3 + Math.random() * 4;
+
+
+        item.style.animationDuration =
+            duration + "s";
 
 
         document.body.appendChild(item);
@@ -1084,7 +1021,8 @@
 
 
     /* =========================
-       ПАДАЮЩИЕ ФОТО
+       ФОТОГРАФИИ
+       МЕДЛЕННЫЙ ДОЖДЬ
     ========================= */
 
     function startFallingPhotos() {
@@ -1100,34 +1038,44 @@
 
 
         /*
-         * Создаём первую фотографию сразу,
-         * чтобы не было задержки.
+         * Первая фотография сразу.
          */
 
         createFallingPhoto(
-            photos[Math.floor(Math.random() * photos.length)]
+            photos[
+                Math.floor(
+                    Math.random() * photos.length
+                )
+            ]
         );
 
 
         /*
-         * Потом фотографии продолжают падать
-         * постоянно.
+         * Дальше фотографии падают
+         * постоянно до финальной кнопки.
          */
 
-        photoFallingInterval = setInterval(() => {
+        photoFallingInterval =
+            setInterval(() => {
 
-            createFallingPhoto(
-                photos[Math.floor(Math.random() * photos.length)]
-            );
+                createFallingPhoto(
+                    photos[
+                        Math.floor(
+                            Math.random() * photos.length
+                        )
+                    ]
+                );
 
-        }, 350);
+            }, 600);
 
     }
 
 
     function createFallingPhoto(src) {
 
-        const img = document.createElement("img");
+        const img =
+            document.createElement("img");
+
 
         img.className = "falling-photo";
 
@@ -1135,50 +1083,53 @@
 
 
         /*
-         * Маленький случайный размер.
+         * Размер немного больше,
+         * чем был раньше.
          */
 
-        const size = 50 + Math.random() * 35;
+        const size =
+            70 + Math.random() * 35;
 
-        img.style.width = size + "px";
 
-        img.style.height = size + "px";
+        img.style.width =
+            size + "px";
+
+
+        img.style.height =
+            size + "px";
 
 
         /*
-         * Случайная позиция по горизонтали.
+         * Случайная позиция.
          */
 
         img.style.left =
-            Math.random() * (100 - (size / window.innerWidth * 100))
+            Math.random() *
+            (100 - (size / window.innerWidth * 100))
             + "vw";
 
 
         /*
-         * Небольшой случайный поворот.
+         * НИКАКОГО ВРАЩЕНИЯ.
          */
-
-        const rotation = -30 + Math.random() * 60;
-
-        img.style.transform =
-            "rotate(" + rotation + "deg)";
 
 
         /*
-         * Скорость падения.
+         * Медленный дождь:
+         * каждая фотография падает
+         * примерно 7-10 секунд.
          */
 
-        const duration = 3 + Math.random() * 4;
+        const duration =
+            7 + Math.random() * 3;
 
-        img.style.animationDuration = duration + "s";
+
+        img.style.animationDuration =
+            duration + "s";
 
 
         document.body.appendChild(img);
 
-
-        /*
-         * Удаляем после завершения падения.
-         */
 
         setTimeout(() => {
 
@@ -1246,14 +1197,18 @@
         activeTimers = [];
 
 
-        const picture = document.getElementById("wrongPicture");
+        const picture =
+            document.getElementById("wrongPicture");
+
 
         if (picture) {
             picture.remove();
         }
 
 
-        const blocker = document.getElementById("interactionBlocker");
+        const blocker =
+            document.getElementById("interactionBlocker");
+
 
         if (blocker) {
             blocker.remove();
@@ -1265,3 +1220,4 @@
 
 </body>
 </html>
+```
